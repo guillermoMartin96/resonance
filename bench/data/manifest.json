@@ -1,0 +1,103 @@
+{
+  "_comment": "Benchmark source audio. Nothing here is committed to the repo; scripts/fetch_data.py downloads into bench/.cache and verifies checksums. Split assignments were fixed before any holdout scoring.",
+  "babyslakh": {
+    "url": "https://zenodo.org/records/4603870/files/babyslakh_16k.tar.gz?download=1",
+    "md5": "311096dc2bde7d61c97e930edbfc7f78",
+    "license": "CC-BY-4.0",
+    "attribution": "BabySlakh (Slakh2100 subset) by Ethan Manilow, Gordon Wichern, Prem Seetharaman, Jonathan Le Roux. https://zenodo.org/records/4603870",
+    "dev": [
+      "Track00001",
+      "Track00002",
+      "Track00003",
+      "Track00004",
+      "Track00005"
+    ],
+    "holdout": [
+      "Track00006",
+      "Track00007",
+      "Track00008",
+      "Track00009",
+      "Track00010",
+      "Track00011",
+      "Track00012",
+      "Track00013",
+      "Track00014",
+      "Track00015",
+      "Track00016",
+      "Track00017",
+      "Track00018",
+      "Track00019",
+      "Track00020"
+    ]
+  },
+  "acappellas": [
+    {
+      "id": "commons-twinkle-solo",
+      "split": "dev",
+      "voice": "solo (amateur)",
+      "sha1": "49d92ef6ab74740dc4b4bf2852066f794215b001",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Twinkle_Twinkle_Little_Star_-_sung_with_full_lyrics.ogg",
+      "page": "https://commons.wikimedia.org/wiki/File:Twinkle_Twinkle_Little_Star_-_sung_with_full_lyrics.ogg",
+      "license": "CC0-1.0",
+      "attribution": "\"Twinkle Twinkle Little Star - sung with full lyrics\" by Dcoetzee, Wikimedia Commons, CC0"
+    },
+    {
+      "id": "commons-eternal-father-navy",
+      "split": "dev",
+      "voice": "male ensemble",
+      "sha1": "7913a1e1beb1b187ab7e72c065b33d958a3daf8b",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/41/Eternal_Father_-_U.S._Navy_Band.ogg",
+      "page": "https://commons.wikimedia.org/wiki/File:Eternal_Father_-_U.S._Navy_Band.ogg",
+      "license": "Public domain (US federal government work)",
+      "attribution": "\"Eternal Father, Strong to Save\" performed by the U.S. Navy Band Sea Chanters, public domain"
+    },
+    {
+      "id": "commons-leyiz-m-plorer-solo",
+      "split": "holdout",
+      "voice": "solo",
+      "sha1": "aa81ffcd343971814cca3fa349640e0a186c0293",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/34/Wa_Defrecheux_Ley%C3%AEz_m%27_plorer.ogg",
+      "page": "https://commons.wikimedia.org/wiki/File:Wa_Defrecheux_Ley%C3%AEz_m%27_plorer.ogg",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "\"Leyîz m' plorer\" sung by Lucyin, Wikimedia Commons, CC BY-SA 4.0"
+    },
+    {
+      "id": "commons-shenandoah-usaf",
+      "split": "holdout",
+      "voice": "mixed choir",
+      "sha1": "d4c93e2ed38c808022f8cb2a74ede01f8b186e21",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Shenandoah_%282017%29_-_Singing_Sergeants_-_United_States_Air_Force_Band.mp3",
+      "page": "https://commons.wikimedia.org/wiki/File:Shenandoah_(2017)_-_Singing_Sergeants_-_United_States_Air_Force_Band.mp3",
+      "license": "Public domain (US federal government work)",
+      "attribution": "\"Shenandoah\" (arr. Werle/Davis) performed by the USAF Band Singing Sergeants, public domain"
+    },
+    {
+      "id": "commons-angels-army-chorus",
+      "split": "holdout",
+      "voice": "mixed choir",
+      "sha1": "725892620e842be6e213c88be2bd7e9b0386fa04",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/87/U.S._Army_Band_-_Angels_We_Have_Heard_on_High.ogg",
+      "page": "https://commons.wikimedia.org/wiki/File:U.S._Army_Band_-_Angels_We_Have_Heard_on_High.ogg",
+      "license": "Public domain (US federal government work)",
+      "attribution": "\"Angels We Have Heard on High\" performed by the U.S. Army Chorus, public domain"
+    }
+  ],
+  "rejected_sources": [
+    {
+      "source": "ccMixter a cappellas (CC BY 3.0)",
+      "reason": "Direct file URLs return HTTP 403 to unauthenticated requests on 2026-10-09; the file page offers streaming only. Not worked around."
+    },
+    {
+      "source": "QUASI (Telecom Paris)",
+      "reason": "Requires accepting per-song terms via a subscription form; several tracks are NonCommercial. Needs owner approval (DR-0002)."
+    },
+    {
+      "source": "MUSDB18/MUSDB18-HQ, MedleyDB, MoisesDB",
+      "reason": "Academic/non-commercial terms; excluded per project rules."
+    },
+    {
+      "source": "Commons 'Bright College Years.oga'",
+      "reason": "CC BY 3.0 claim on a commercial album recording; provenance doubtful."
+    }
+  ]
+}

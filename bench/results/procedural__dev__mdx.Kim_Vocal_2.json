@@ -1,0 +1,162 @@
+{
+  "separator": {
+    "id": "mdx.Kim_Vocal_2",
+    "engine": "mdx-onnx",
+    "engine_version": "stemforge-mdx-1/onnxruntime-1.23.2",
+    "model_name": "Kim_Vocal_2.onnx",
+    "native_sample_rate": 44100,
+    "roles": [
+      "vocals",
+      "accompaniment"
+    ],
+    "code_license": "MIT (algorithm from audio-separator/UVR)",
+    "weights_license": "unstated (TRvlvr/model_repo has no LICENSE; trainer/training data undisclosed)",
+    "weights_sha256": [
+      "ce74ef3b6a6024ce44211a07be9cf8bc6d87728cc852a68ab34eb8e58cde9c8b"
+    ],
+    "params": {
+      "hop": 1024,
+      "segment": 256,
+      "overlap": 0.25,
+      "compensate": 1.009,
+      "mdx_dim_f_set": 3072,
+      "mdx_dim_t_set": 8,
+      "mdx_n_fft_scale_set": 7680,
+      "primary_stem": "Vocals"
+    }
+  },
+  "dataset": "procedural",
+  "split": "dev",
+  "n_items": 4,
+  "frozen_config_sha256": null,
+  "git_rev": "681ae1d4b13a827376a18527e1823421addfed2d",
+  "env": {
+    "python": "3.12.15",
+    "machine": "x86_64",
+    "platform": "macOS-26.2-x86_64-i386-64bit",
+    "processor": "i386",
+    "numpy": "1.26.4",
+    "scipy": "1.17.1"
+  },
+  "timing": {
+    "dataset_load_s": 3.85580183500133,
+    "model_load_s": 0.4527948230097536,
+    "total_separate_s": 112.16654346197902,
+    "total_audio_s": 96.0
+  },
+  "memory_mb": {
+    "peak_before_model": 528.637952,
+    "peak_after_load": 726.97856,
+    "peak_total": 3470.700544
+  },
+  "items": [
+    {
+      "item": "procedural-0",
+      "license": "CC0-1.0",
+      "duration_s": 24.0,
+      "separate_s": 26.45273145099054,
+      "rtf": 1.1021971437912725,
+      "metrics": {
+        "vocals": {
+          "sdr": 0.0021938614117349964,
+          "si_sdr": -25.15471188960626,
+          "silent_leak_db": -51.87429626270309,
+          "est_rms_dbfs": -73.98906953780994,
+          "sir": 0.9877463774998286,
+          "sar": -22.458888374351385,
+          "bleed_ratio": 0.0025030927719093482
+        },
+        "accompaniment": {
+          "sdr": 3.673590627944672,
+          "si_sdr": 3.636741366335601,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -22.40252771961785,
+          "sir": 3.6728270930635434,
+          "sar": 51.56902153251078,
+          "bleed_ratio": 0.30208771899175363
+        }
+      }
+    },
+    {
+      "item": "procedural-1",
+      "license": "CC0-1.0",
+      "duration_s": 24.0,
+      "separate_s": 27.614386236993596,
+      "rtf": 1.1505994265414,
+      "metrics": {
+        "vocals": {
+          "sdr": 0.4900641174750937,
+          "si_sdr": -8.810560654614997,
+          "silent_leak_db": -51.93624879414577,
+          "est_rms_dbfs": -39.65635413425614,
+          "sir": 22.074489543668072,
+          "sar": -8.769212270916437,
+          "bleed_ratio": 0.0007226577734152259
+        },
+        "accompaniment": {
+          "sdr": 4.455890693544794,
+          "si_sdr": 4.573098152022083,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -22.00322192040348,
+          "sir": 4.74817287168033,
+          "sar": 17.97977145520082,
+          "bleed_ratio": 0.24327689002054878
+        }
+      }
+    },
+    {
+      "item": "procedural-2",
+      "license": "CC0-1.0",
+      "duration_s": 24.0,
+      "separate_s": 25.676229317992693,
+      "rtf": 1.0698428882496955,
+      "metrics": {
+        "vocals": {
+          "sdr": -2.465883098172742e-05,
+          "si_sdr": -56.26255714001878,
+          "silent_leak_db": -49.44204952377326,
+          "est_rms_dbfs": -75.99683683842736,
+          "sir": -29.596030069878992,
+          "sar": -27.1696002854108,
+          "bleed_ratio": 0.001913070373668202
+        },
+        "accompaniment": {
+          "sdr": 3.0871753715050905,
+          "si_sdr": 3.2528146781605525,
+          "silent_leak_db": 0.0002082355403201901,
+          "est_rms_dbfs": -23.89783361638212,
+          "sir": 3.086440147198031,
+          "sar": 51.937626615769474,
+          "bleed_ratio": 0.32126899450365337
+        }
+      }
+    },
+    {
+      "item": "procedural-3",
+      "license": "CC0-1.0",
+      "duration_s": 24.0,
+      "separate_s": 32.42319645600219,
+      "rtf": 1.3509665190000912,
+      "metrics": {
+        "vocals": {
+          "sdr": -0.00022302142695771924,
+          "si_sdr": -49.37488097888994,
+          "silent_leak_db": -51.449260765700075,
+          "est_rms_dbfs": -76.11787847476282,
+          "sir": -19.552589487056306,
+          "sar": -29.77723470213239,
+          "bleed_ratio": 0.0010399964943345044
+        },
+        "accompaniment": {
+          "sdr": 4.360951275682477,
+          "si_sdr": 4.337314879585942,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -23.563948685312205,
+          "sir": 4.360483010163944,
+          "sar": 52.51541816065939,
+          "bleed_ratio": 0.2691962027115634
+        }
+      }
+    }
+  ]
+}
