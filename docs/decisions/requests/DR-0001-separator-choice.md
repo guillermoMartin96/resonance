@@ -1,6 +1,6 @@
 # DR-0001 — Separation engine selection
 
-Status: **OPEN — awaiting owner approval.** Evidence is complete for M0; no engine has been integrated into product code.
+Status: **APPROVED (provisional) — 2026-10-09, by the owner/technical lead.** Option C, under the conditions in *Decision record* below. No engine has been integrated into product code yet.
 
 ## Decision
 Choose the initial separation backend(s) for M1, given legal use, fidelity, runtime and developer compatibility.
@@ -46,5 +46,18 @@ Small holdout (6 vocal mixes, 14 instrumental excerpts); 16 kHz material under-m
 ## Reversibility
 Fully reversible: engines are registry entries behind one protocol, weights aren't committed, and switching engines changes only `separator_id`. Irreversible only if outputs are distributed commercially under an unverified weights licence.
 
-## Approval
-Owner selects an option (and confirms whether commercial export is in scope). Until then M1 must not start (per instructions), and if it does start unresolved, M1 only gets the baseline-backed pipeline per `docs/milestones/M1.md` preconditions.
+## Decision record (2026-10-09)
+**Approved:** Demucs `htdemucs` as the *provisional* four-stem engine; MDX `Kim_Vocal_2` as the *optional* enhanced-vocal engine (option C).
+
+Binding conditions:
+1. **Adapter interface preserved.** Both engines stay behind the `Separator` protocol (`bench/stemforge_bench/separators/base.py`) and its M1 successor; no engine-specific types in API/UI/storage.
+2. **No-ML baseline is the M1 default.** The M1 pipeline ships with `baseline.mixture` / `baseline.hpss` selected by default; ML engines are opt-in.
+3. **Enhanced vocals optional.** `Kim_Vocal_2` is never required for any workflow.
+4. **Reproducibility.** Pinned package versions, weight sha256 checksums verified before use, frozen configuration, and provenance metadata (engine, version, model, weights sha256, params, input hash) on every output.
+5. **Non-commercial use only for ML weights.** Both weight sets have *unstated* licences. Use is limited to non-commercial research and prototyping until commercial rights are verified in writing. Commercial export stays disabled for ML-derived outputs.
+6. **Code licence ≠ weight rights.** MIT code licences (demucs, audio-separator) say nothing about the weights or the training data. No document or UI may imply otherwise.
+7. **Replaceable.** Either engine can be swapped by changing a registry entry and `separator_id`; nothing may depend on a specific engine's internals.
+
+Not decided here: whether commercial export is in product scope (`docs/PRODUCT.md` open question). Until it is, the restriction in condition 5 applies.
+
+Still open evidence (does not block the provisional approval, does block calling the choice *final*): blind listening results (owner) and the expanded full-band corpus (DR-0002).

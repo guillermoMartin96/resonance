@@ -1,6 +1,6 @@
 # DR-0003 — Development runtime and worker platform
 
-Status: OPEN — owner approval needed before M1 scaffolding pins versions.
+Status: **APPROVED — 2026-10-09, by the owner/technical lead.** Native Intel macOS CPU development, pinned, Node 22 LTS. Compatibility check passed (below).
 
 ## Context (evidence: `docs/research/M0-environment.md`)
 The development machine is an **Intel x86_64 Mac** (i9-9880H, 32 GB, no CUDA). Upstream ML runtimes no longer publish Intel-macOS wheels:
@@ -24,5 +24,21 @@ Node: pin **Node 22 LTS** via `.nvmrc` (`nvm install 22`, user-level, reversible
 ## Consequences
 A/C pin us to torch 2.2.2 on this machine; reversible by moving the worker (B). B adds a container build to the dev setup. Installing Node 22 changes nothing system-wide (nvm is per-user).
 
-## Approval
-Owner selects. No runtime upgrades or installs outside project venvs have been made.
+## Decision record (2026-10-09)
+**Approved:** native Intel macOS CPU development with pinned dependencies (option A, kept container-ready as in C) and **Node 22 LTS**, provided compatibility checks pass.
+
+Conditions:
+1. The worker stays portable to Linux (CI runs the bench suite on `ubuntu-latest`, see `.github/workflows/ci.yml`).
+2. No new infrastructure or containerisation in M0.
+3. Installation limitations and a reproducible setup are documented (`bench/README.md`, `docs/research/M0-environment.md`).
+4. Platform-specific logic stays isolated (today: the `--no-deps demucs` install step and the RSS unit conversion in `run.py`/`perf_probe.py`).
+
+### Compatibility check (2026-10-09, this machine)
+| Check | Result |
+|---|---|
+| `nvm install 22` (per-user) | Node **v22.23.3** (LTS "Jod"), npm 10.9.9, `x64 darwin` |
+| Vite 7.3.7 install + `vite build` of a trivial page, in a scratch directory outside the repo | ok |
+| Python bench suite on pinned versions (`pytest -q`) | 18 passed |
+| Same suite on Linux x86_64 (GitHub Actions) | see CI on the PR |
+
+`.nvmrc` pins `22`. Node 25.4.0 and 18.7.0 remain installed but are not used by the project.

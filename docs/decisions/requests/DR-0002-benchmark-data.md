@@ -1,6 +1,6 @@
 # DR-0002 — Benchmark corpus expansion (real multitrack material)
 
-Status: OPEN — owner approval needed. M0 proceeded with the sources below that needed no account, form or terms acceptance.
+Status: **APPROVED — 2026-10-09, by the owner/technical lead.** Expansion approved; the expanded evaluation is **not started** (no audio acquired yet). See *Decision record*.
 
 ## Context
 The M0 benchmark (`docs/research/BENCHMARK_PROTOCOL.md`) uses:
@@ -23,5 +23,17 @@ E. **Full Slakh2100** (CC BY 4.0, 44.1 kHz flac, ~100 GB). Full-band, many track
 ## Consequences
 All options are reversible; no audio is committed to the repo in any option. Options B and C put third-party terms acceptance in the owner's name.
 
-## Approval
-Owner selects options. No terms will be accepted and no account-gated downloads made by the agent.
+## Decision record (2026-10-09)
+**Approved:** expand evaluation with **5–10 full-quality tracks** representative of house, trance, hip-hop and instrumental sampling.
+
+Conditions:
+1. Every item's licence/permission is documented in the manifest (source, licence, attribution, who granted permission and when).
+2. Real multitrack references are preferred over synthetic mixes.
+3. Include 44.1 kHz and 48 kHz material.
+4. Evaluate audible artifacts, transients, cymbals, bass, vocal bleed and false vocal extraction (objective metrics where ground truth exists + blinded listening).
+5. Prepare a blinded listening evaluation for the expanded set (same rubric as `docs/research/LISTENING_TEST.md`).
+6. **The original frozen benchmark is unchanged.** `bench/config/frozen.json` (sha256 `cb98142e…`) and its holdout results are not edited; the expansion gets its own manifest section, split and frozen config.
+7. **Not complete until the audio exists and has been evaluated.** No results may be reported for items that have not been acquired and run.
+8. No restricted content, no bypassing access controls (e.g. the ccMixter 403 stays a manual, owner-performed download), no terms accepted by the agent on the owner's behalf.
+
+Status of the expansion: **0 of 5–10 items acquired.** Acquisition path per item is the owner's choice (options C/D above; B needs the owner to accept QUASI terms).

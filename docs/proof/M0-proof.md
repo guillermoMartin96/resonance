@@ -72,5 +72,5 @@ No audio, weights or credentials committed (`bench/.gitignore` excludes `.cache/
 Independent review not yet performed. Per the playbook, request one before M1 begins (scope: `bench/` correctness, metrics, licence handling).
 
 ## Go/no-go recommendation
-**GO for M0 completion; M1 remains blocked** pending owner decisions on DR-0001 (engine; recommendation: htdemucs + Kim_Vocal_2 behind adapters, non-commercial use only), DR-0002 (corpus expansion) and DR-0003 (runtime platform; recommendation: native pinned now, container-ready worker boundary, Node 22 LTS).
+DR-0001, DR-0002 and DR-0003 were **approved on 2026-10-09** (see each record's *Decision record* section). M0 merge readiness depends on the independent review and CI on the final commit (see *Review findings and disposition*). Open gates that do not block the M0 merge but must stay visible: owner blind listening results (`docs/research/LISTENING_TEST.md`) and the DR-0002 expanded corpus (0 items acquired).
 
