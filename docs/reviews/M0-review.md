@@ -65,10 +65,30 @@ Reading:
 - CI does not run the real-weight tests: it makes no weight downloads by design.
 
 ## Remediation commits
-`e503145` (M0-01…06), `d8d9492` (compare script), `bf24295` (compare script false-pass), plus the re-run evidence and docs commit that follows them.
+`e503145` (M0-01…06), `d8d9492` (compare script), `bf24295` (compare script false-pass), `b3b3994` (re-run evidence + docs), `bb18940` (round-2 Mediums).
 
 ## Round 2
-ROUND2_PLACEHOLDER
+Codex re-reviewed the fix diff `fe8a8f7..3c020c6` (session `01a12428-a2c4-7f43-80c3-5c33616e2f5d`; verbatim: `docs/reviews/evidence/M0-codex-review-round2.md`). It re-verified the cached artefact hashes, all 7 pinned Demucs files, Demucs loader parity with upstream `get_hf_model`, all 66 re-run input digests, exact metric equality on the 26 deterministic items, and that **all 18 original holdout JSONs are byte-identical** to round 1.
+
+| ID | Round-2 status |
+|---|---|
+| M0-01 (High) | **Resolved** |
+| M0-02 (High) | **Resolved** |
+| M0-03 | Partially resolved → follow-ups M0-03a/b below |
+| M0-04, M0-05, M0-06 | **Resolved** |
+
+New findings in round 2. All are Medium and none blocking; all fixed in `bb18940`:
+
+| ID | Sev. | Finding | Fix | Tests |
+|---|---|---|---|---|
+| M0-03a | Medium | Frozen config accepted an omitted param, unknown dataset keys, and a wrong `metrics_module` | Complete schema enforced (top-level, dataset and per-separator key sets must match exactly); `metrics_module` must equal the module actually imported. All 18 committed combinations still validate. | 5× `test_frozen_config_schema_is_complete` |
+| M0-03b | Medium | Unknown git state (`None`) passed the dirty-tree gate | Holdout refuses unknown git state unless `--allow-dirty`, which is recorded in the result | `test_holdout_refuses_unknown_git_state` |
+| M0-07 | Medium | `compare_results.py` dropped items whose score became `None` from both sides and reported a false match | Flags item-set, role-set and per-item validity changes and missing base files (exit 1); medians per run over its own valid scores. Re-running it on the committed re-run evidence still gives exit 0 with the same table. | 2× `test_compare_flags_validity_changes`, `test_compare_flags_role_set_change`, `test_compare_identical_passes` |
+
+Round 2 verdict (Codex): **"Remaining blocking findings: none."**
+
+## Round 3
+ROUND3_PLACEHOLDER
 
 ## Remaining risks
 See `docs/proof/M0-proof.md` → *Failures and limitations*, and the PR description.
