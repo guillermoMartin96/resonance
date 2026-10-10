@@ -1,6 +1,6 @@
 # Independent review — M0
 
-**Milestone / branch / commit:** M0 · `feature/m0-research` · PR #1 (draft). Round 1 reviewed `fe8a8f7`. Fixes are in `e503145`, `d8d9492`, `bf24295` (see *Remediation commits*). Round 2 (re-review of the fixes): see *Round 2*.
+**Milestone / branch / commit:** M0 · `feature/m0-research` · PR #1 (draft). Four review rounds: round 1 on `fe8a8f7`, round 2 on `3c020c6`, round 3 on `231b55b`, round 4 on `524cdda` (final reviewed code commit).
 
 **Reviewer and scope:** OpenAI Codex CLI 0.162.0 (`codex exec -s read-only`, model `gpt-6.1-sol`, session `01a123ff-dd84-7aa2-8c25-b53ed80c706b`). It is independent of the authoring agent (Claude Code). The brief, with the seven owner-specified priorities, is in `docs/reviews/M0-review-handoff.md`. The reviewer inspected the code, git history, result JSONs and cached artefacts, and ran the test suite plus its own recomputation probes. It did not rely on the summaries. Its unedited output is in `docs/reviews/evidence/M0-codex-review-round1.md`.
 
@@ -65,7 +65,7 @@ Reading:
 - CI does not run the real-weight tests: it makes no weight downloads by design.
 
 ## Remediation commits
-`e503145` (M0-01…06), `d8d9492` (compare script), `bf24295` (compare script false-pass), `b3b3994` (re-run evidence + docs), `bb18940` (round-2 Mediums).
+`e503145` (M0-01…06), `d8d9492` (compare script), `bf24295` (compare script false-pass), `b3b3994` (re-run evidence + docs), `524cdda` (round 3: M0-08, M0-03b), `bb18940` (round-2 Mediums).
 
 ## Round 2
 Codex re-reviewed the fix diff `fe8a8f7..3c020c6` (session `01a12428-a2c4-7f43-80c3-5c33616e2f5d`; verbatim: `docs/reviews/evidence/M0-codex-review-round2.md`). It re-verified the cached artefact hashes, all 7 pinned Demucs files, Demucs loader parity with upstream `get_hf_model`, all 66 re-run input digests, exact metric equality on the 26 deterministic items, and that **all 18 original holdout JSONs are byte-identical** to round 1.
@@ -88,10 +88,27 @@ New findings in round 2. All are Medium and none blocking; all fixed in `bb18940
 Round 2 verdict (Codex): **"Remaining blocking findings: none."**
 
 ## Round 3
-ROUND3_PLACEHOLDER
+Codex verified the round-2 fixes (session `01a1242c-e4ae-7943-9c35-5e3d101418d2`; verbatim: `evidence/M0-codex-review-round3.md`): **M0-03a Resolved, M0-07 Resolved, M0-03b Partially resolved**. It found one new issue:
+
+| ID | Sev. | Finding | Fix (`524cdda`) |
+|---|---|---|---|
+| M0-08 | Medium | **Caused by the authoring agent.** When the new git-state test was first run against the unfixed code, `run.main()` executed and overwrote `results/procedural__holdout__baseline.mixture.json` with a 1-item probe, which `bb18940` then committed. That broke "original frozen benchmark unchanged". The real-audio results were not affected. | File restored byte for byte. The test now writes to `tmp_path`, stubs the dataset loader, and asserts the gate fires before any load. `results/HOLDOUT_SHA256.json` pins all 18 original holdout files and `test_original_holdout_results_untouched` enforces it. Every file in `bench/results/` that existed at `0ec5611` is byte-identical to it. |
+| M0-03b (rest) | Medium | `git_rev == "unknown"` with a clean status still passed | Revision and status are both checked before loading; either unknown → refused unless `--allow-dirty`; the validated revision is the one recorded. Tests: 2× `test_holdout_refuses_unknown_git_state` |
+
+## Round 4 (final)
+Codex (session `01a12430-3316-7691-aa54-e51d91c16c4e`; verbatim: `evidence/M0-codex-review-round4.md`): **M0-03b Resolved, M0-08 Resolved; new findings: none; no Critical/High in `681ae1d..524cdda`. "Blocking findings: none. Fit to merge as provisional research: yes."** It noted that the hash guard pins the 18 holdout JSONs only; `SUMMARY.md`, dev and perf results were verified identical to `0ec5611` but are not guarded.
+
+Final tally: 9 findings (2 High, 6 Medium, 1 Low). All fixed and independently confirmed resolved. None open.
+
+Reviewer limitation, all rounds: the sandbox had no writable temp directory, so Codex could not execute the filesystem-dependent tests (listening packet, download atomicity, comparison, git gate). It covered their logic with in-memory probes. These tests pass locally (53/53) and in Linux CI.
 
 ## Remaining risks
 See `docs/proof/M0-proof.md` → *Failures and limitations*, and the PR description.
 
 ## Merge recommendation
-MERGE_PLACEHOLDER
+**Ready to merge as provisional M0 research, pending owner approval.** No Critical/High findings remain. Owner-side gates that stay open and do not block the merge: blind listening results (`docs/research/LISTENING_TEST.md`) and the DR-0002 expanded corpus (0 items). Neither may be reported as complete until done.
+
+Carry-forward items for M1 (non-blocking):
+- Size/duration limits and process-isolated decoding for user uploads.
+- A committed MDX reference-parity check, as a Linux CI job.
+- Commercial-use restriction on ML weights (DR-0001 condition 5).

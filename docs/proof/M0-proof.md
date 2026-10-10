@@ -40,7 +40,7 @@ MDX parity check (throwaway venv in the session scratchpad, not in the repo): `a
 ## Expected vs observed
 | Check | Expected | Observed |
 |---|---|---|
-| Unit + contract tests | pass | originally **18 passed**; after review fixes **41 passed** locally (`pytest -q`, ~30 s, incl. real-weight smoke tests); CI on Linux: real-weight tests skip by design |
+| Unit + contract tests | pass | originally **18 passed**; after review fixes **53 passed** locally (`pytest -q`, ~30 s, incl. real-weight smoke tests); CI on Linux: real-weight tests skip by design |
 | `pip check` | clean | 1 known issue: `demucs 4.1.0 requires sphn` (intentionally absent; see environment doc) |
 | numpy STFT vs torch.stft | ≤1e-8 | pass |
 | MDX adapter vs audio-separator 0.21.2 | match | Inst_HQ_3 primary SI-SDR 47.7 dB; Kim_Vocal_2 mismatch explained by a reference bug (in-place normalisation), confirmed at 73.6 dB |
@@ -70,7 +70,7 @@ Drums / bass / other (14 BabySlakh excerpts): htdemucs 9.92 / 5.26 / 10.23 · ht
 No audio, weights or credentials committed (`bench/.gitignore` excludes `.cache/` and `.venv/`). Every source has its licence and attribution in the manifest; NC sources excluded; account- or terms-gated sources not accessed. Tar extraction uses `filter="data"` (blocks path traversal). Downloads are checksum-verified. No Spotify, streaming capture or DRM-related code. Subprocess use is limited to fixed argv lists (`git rev-parse`, perf-probe child python), with no shell interpolation of external input.
 
 ## Review findings and disposition
-Independent review by OpenAI Codex (round 1 on `fe8a8f7`): 2 High, 3 Medium, 1 Low. All were fixed in `e503145` and later commits. Full record with evidence: `docs/reviews/M0-review.md`; unedited reviewer output: `docs/reviews/evidence/`.
+Independent review by OpenAI Codex, 4 rounds (`fe8a8f7` → `524cdda`): 9 findings (2 High, 6 Medium, 1 Low). All are fixed and independently confirmed resolved; final verdict: no blocking findings. Full record with evidence: `docs/reviews/M0-review.md`; unedited reviewer output: `docs/reviews/evidence/`.
 
 Provenance limitations of the *original* committed results, kept unchanged on purpose: Demucs originals came from one unseeded shift draw (quantified above); no per-item input hashes; five *dev* procedural results record `git_rev` `681ae1d` because they ran before the harness was first committed. One Commons vocal MP3 makes libmpg123 print "Illegal Audio-MPEG-Header … resync" (a trailing ID3 `LYRI` tag); the file is checksum-pinned and decodes identically on every run.
 
