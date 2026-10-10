@@ -1,0 +1,323 @@
+{
+  "separator": {
+    "id": "demucs.htdemucs",
+    "engine": "demucs",
+    "engine_version": "4.1.0",
+    "model_name": "htdemucs",
+    "native_sample_rate": 44100,
+    "roles": [
+      "vocals",
+      "drums",
+      "bass",
+      "other",
+      "accompaniment"
+    ],
+    "code_license": "MIT",
+    "weights_license": "unstated (HF adefossez/* model cards carry no license; trained on MUSDB18-HQ + ~800 undisclosed songs)",
+    "weights_sha256": [
+      "955717e8.safetensors:d9fa14133cfcc034a6758923bb3a8ca9f8dfd0b582134643bbf83f72c17576dd"
+    ],
+    "params": {
+      "shifts": 1,
+      "overlap": 0.25,
+      "seed": 0,
+      "device": "cpu"
+    }
+  },
+  "dataset": "babyslakh",
+  "split": "dev",
+  "n_items": 5,
+  "frozen_config_sha256": null,
+  "git_rev": "e26d6d2628b97ce17ae336c9b99d06f1f13ef8ba",
+  "env": {
+    "python": "3.12.15",
+    "machine": "x86_64",
+    "platform": "macOS-26.2-x86_64-i386-64bit",
+    "processor": "i386",
+    "numpy": "1.26.4",
+    "scipy": "1.17.1"
+  },
+  "timing": {
+    "dataset_load_s": 2.0131658669997705,
+    "model_load_s": 3.1545781650056597,
+    "total_separate_s": 113.40764135599602,
+    "total_audio_s": 150.0
+  },
+  "memory_mb": {
+    "peak_before_model": 373.39136,
+    "peak_after_load": 748.478464,
+    "peak_total": 2579.447808
+  },
+  "items": [
+    {
+      "item": "babyslakh-Track00001",
+      "license": "CC-BY-4.0",
+      "duration_s": 30.0,
+      "separate_s": 25.132270454996615,
+      "rtf": 0.8377423484998872,
+      "metrics": {
+        "vocals": {
+          "sdr": null,
+          "si_sdr": null,
+          "silent_leak_db": -54.91648775103812,
+          "est_rms_dbfs": -74.15104892685359,
+          "sir": null,
+          "sar": null,
+          "bleed_ratio": null
+        },
+        "drums": {
+          "sdr": 14.752680453975653,
+          "si_sdr": 14.664814794317191,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -26.291161393459376,
+          "sir": 42.948113503699936,
+          "sar": 14.671947709603026,
+          "bleed_ratio": 4.9050879620483724e-05
+        },
+        "bass": {
+          "sdr": 12.677094975299799,
+          "si_sdr": 12.482452213819496,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -25.709147001269898,
+          "sir": 25.345494643356737,
+          "sar": 12.72998557386116,
+          "bleed_ratio": 0.002766928750502997
+        },
+        "other": {
+          "sdr": 15.70700755974217,
+          "si_sdr": 15.600347100835481,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -21.888603704839685,
+          "sir": 32.22095446683822,
+          "sar": 15.698766501929951,
+          "bleed_ratio": 0.00058361454127956
+        },
+        "accompaniment": {
+          "sdr": 33.85327063619786,
+          "si_sdr": 33.86764086481287,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -19.25840147926975,
+          "sir": 137.5522435247053,
+          "sar": 33.903775133755076,
+          "bleed_ratio": 5.531713595165301e-33
+        }
+      }
+    },
+    {
+      "item": "babyslakh-Track00002",
+      "license": "CC-BY-4.0",
+      "duration_s": 30.0,
+      "separate_s": 22.439914319998934,
+      "rtf": 0.7479971439999644,
+      "metrics": {
+        "vocals": {
+          "sdr": null,
+          "si_sdr": null,
+          "silent_leak_db": -47.908301865769204,
+          "est_rms_dbfs": -69.53293234985152,
+          "sir": null,
+          "sar": null,
+          "bleed_ratio": null
+        },
+        "drums": {
+          "sdr": 4.998033585690661,
+          "si_sdr": 4.365788931001942,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -27.69974687016312,
+          "sir": 11.564201926632494,
+          "sar": 5.599487994826545,
+          "bleed_ratio": 0.05128171726170431
+        },
+        "bass": {
+          "sdr": 6.022652647892988,
+          "si_sdr": 4.922158873655146,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -28.91983354346834,
+          "sir": 12.701343224596206,
+          "sar": 5.978356781590906,
+          "bleed_ratio": 0.040900944826183595
+        },
+        "other": {
+          "sdr": 6.193645149881295,
+          "si_sdr": 5.069577766736605,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -25.5852219092441,
+          "sir": 18.757683927769182,
+          "sar": 5.332878166931346,
+          "bleed_ratio": 0.010188233274840272
+        },
+        "accompaniment": {
+          "sdr": 25.417409964518303,
+          "si_sdr": 25.76456923583845,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -21.772274138273396,
+          "sir": 135.02916479560474,
+          "sar": 25.96895323463725,
+          "bleed_ratio": 6.693659125028998e-33
+        }
+      }
+    },
+    {
+      "item": "babyslakh-Track00003",
+      "license": "CC-BY-4.0",
+      "duration_s": 30.0,
+      "separate_s": 21.811190619002446,
+      "rtf": 0.7270396873000815,
+      "metrics": {
+        "vocals": {
+          "sdr": null,
+          "si_sdr": null,
+          "silent_leak_db": -60.359694510352774,
+          "est_rms_dbfs": -80.0654333647749,
+          "sir": null,
+          "sar": null,
+          "bleed_ratio": null
+        },
+        "drums": {
+          "sdr": 10.205194504009395,
+          "si_sdr": 9.773721672358132,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -27.014464195710154,
+          "sir": 28.102233914214235,
+          "sar": 9.843734324520216,
+          "bleed_ratio": 0.0014001656930552261
+        },
+        "bass": {
+          "sdr": 8.151759011017504,
+          "si_sdr": 7.443068939101853,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -27.42505781652678,
+          "sir": 20.177633513994138,
+          "sar": 7.739487885733148,
+          "bleed_ratio": 0.008164376235162495
+        },
+        "other": {
+          "sdr": 11.188973338780407,
+          "si_sdr": 10.854694528873042,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -22.27141791965245,
+          "sir": 18.894216060401675,
+          "sar": 11.673635664915354,
+          "bleed_ratio": 0.011970512537221251
+        },
+        "accompaniment": {
+          "sdr": 30.374463422748846,
+          "si_sdr": 30.39207211822326,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -19.735510515425354,
+          "sir": 137.0730831010165,
+          "sar": 30.556759493729302,
+          "bleed_ratio": 6.994621848066243e-33
+        }
+      }
+    },
+    {
+      "item": "babyslakh-Track00004",
+      "license": "CC-BY-4.0",
+      "duration_s": 30.0,
+      "separate_s": 22.109187110996572,
+      "rtf": 0.7369729036998858,
+      "metrics": {
+        "vocals": {
+          "sdr": null,
+          "si_sdr": null,
+          "silent_leak_db": -48.96972922713228,
+          "est_rms_dbfs": -67.24482089413769,
+          "sir": null,
+          "sar": null,
+          "bleed_ratio": null
+        },
+        "drums": {
+          "sdr": 12.547441044487112,
+          "si_sdr": 12.333892855501658,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -24.80583640386943,
+          "sir": 35.083629454214865,
+          "sar": 12.359345005366666,
+          "bleed_ratio": 0.00029313961247576535
+        },
+        "bass": {
+          "sdr": 12.689331569806262,
+          "si_sdr": 12.46105204893169,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -24.660973242781136,
+          "sir": 32.73545870963411,
+          "sar": 12.505186424272058,
+          "bleed_ratio": 0.0005041628451170342
+        },
+        "other": {
+          "sdr": 13.774647771333385,
+          "si_sdr": 13.62595039280735,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -21.2072486418555,
+          "sir": 25.157372999793772,
+          "sar": 13.957683067072848,
+          "bleed_ratio": 0.002924170796089567
+        },
+        "accompaniment": {
+          "sdr": 33.37292897924908,
+          "si_sdr": 33.442690186218684,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -18.303239288707978,
+          "sir": 138.50721757256528,
+          "sar": 33.4643246674201,
+          "bleed_ratio": 6.67031918362937e-33
+        }
+      }
+    },
+    {
+      "item": "babyslakh-Track00005",
+      "license": "CC-BY-4.0",
+      "duration_s": 30.0,
+      "separate_s": 21.915078851001454,
+      "rtf": 0.7305026283667151,
+      "metrics": {
+        "vocals": {
+          "sdr": null,
+          "si_sdr": null,
+          "silent_leak_db": -42.73063094461791,
+          "est_rms_dbfs": -60.26544687335934,
+          "sir": null,
+          "sar": null,
+          "bleed_ratio": null
+        },
+        "drums": {
+          "sdr": 7.58255472269828,
+          "si_sdr": 6.825752633869593,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -25.82968047750743,
+          "sir": 32.00822664962464,
+          "sar": 6.84241463165473,
+          "bleed_ratio": 0.000521547673926198
+        },
+        "bass": {
+          "sdr": 5.416478337327249,
+          "si_sdr": 3.968149302509315,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -25.86867984145972,
+          "sir": 15.289397815975628,
+          "sar": 4.476274674660716,
+          "bleed_ratio": 0.021337763897140823
+        },
+        "other": {
+          "sdr": 8.947435626115807,
+          "si_sdr": 8.435914089929492,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -19.691603289293884,
+          "sir": 14.579663271214567,
+          "sar": 9.844696889456095,
+          "bleed_ratio": 0.030744492282398863
+        },
+        "accompaniment": {
+          "sdr": 29.744151991860935,
+          "si_sdr": 29.740827332682308,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -17.544750474108017,
+          "sir": 139.26324535302734,
+          "sar": 29.924830737224696,
+          "bleed_ratio": 6.335813515628045e-33
+        }
+      }
+    }
+  ]
+}

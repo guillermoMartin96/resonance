@@ -2,7 +2,7 @@
 
 AI-assisted audio extraction and remix workstation. **Product priority: recover and reuse actual audio from authorized recordings**, not approximate/recreate it with synthesis.
 
-Status: pre-implementation. Name is provisional. Browser-first, local-file-first, audio-first.
+Status: M0 research complete on `feature/m0-research` (see `docs/proof/M0-proof.md`); separator choice awaiting approval in `docs/decisions/requests/DR-0001-separator-choice.md`. Pre-implementation. Name is provisional. Browser-first, local-file-first, audio-first.
 
 ## Start here
 1. Read `CLAUDE.md` and `docs/PRODUCT.md`.

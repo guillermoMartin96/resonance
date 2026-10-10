@@ -1,0 +1,62 @@
+[
+  {
+    "separator": "baseline.mixture",
+    "audio_s": 180,
+    "load_s": 9.930081432685256e-07,
+    "separate_s": 0.1878931689861929,
+    "rtf": 0.0010438509388121828,
+    "peak_rss_mb": 481.390592,
+    "rss_after_data_mb": 211.488768,
+    "rss_after_load_mb": 211.492864
+  },
+  {
+    "separator": "baseline.hpss",
+    "audio_s": 180,
+    "load_s": 1.0179937817156315e-06,
+    "separate_s": 14.926057632008451,
+    "rtf": 0.08292254240004696,
+    "peak_rss_mb": 2382.360576,
+    "rss_after_data_mb": 211.173376,
+    "rss_after_load_mb": 211.177472
+  },
+  {
+    "separator": "mdx.Kim_Vocal_2",
+    "audio_s": 180,
+    "load_s": 0.4456616240058793,
+    "separate_s": 119.54422267900372,
+    "rtf": 0.6641345704389096,
+    "peak_rss_mb": 4008.96,
+    "rss_after_data_mb": 211.173376,
+    "rss_after_load_mb": 511.848448
+  },
+  {
+    "separator": "mdx.UVR-MDX-NET-Inst_HQ_3",
+    "audio_s": 180,
+    "load_s": 0.3851797339884797,
+    "separate_s": 115.04633753300004,
+    "rtf": 0.639146319627778,
+    "peak_rss_mb": 4411.98592,
+    "rss_after_data_mb": 209.424384,
+    "rss_after_load_mb": 486.576128
+  },
+  {
+    "separator": "demucs.htdemucs",
+    "audio_s": 180,
+    "load_s": 2.9572571309981868,
+    "separate_s": 109.59670654700312,
+    "rtf": 0.6088705919277951,
+    "peak_rss_mb": 3338.227712,
+    "rss_after_data_mb": 210.69824,
+    "rss_after_load_mb": 610.963456
+  },
+  {
+    "separator": "demucs.htdemucs_ft",
+    "audio_s": 180,
+    "load_s": 4.973956054993323,
+    "separate_s": 451.98675186300534,
+    "rtf": 2.5110375103500298,
+    "peak_rss_mb": 3779.35872,
+    "rss_after_data_mb": 211.505152,
+    "rss_after_load_mb": 1120.432128
+  }
+]
