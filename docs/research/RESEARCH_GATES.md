@@ -21,3 +21,12 @@ Research provider-specific API and content-use terms before adding Spotify, Free
 
 ## Decision output
 Write `docs/decisions/requests/DR-0001-separator-choice.md` with candidates, evidence, recommendation, limitations and explicit approval needed.
+
+## M0 status (2026-10-09; DR-0001/2/3 approved the same day)
+| Gate | Status | Evidence |
+|---|---|---|
+| R1 | done | `M0-environment.md` (Intel macOS wheel ceilings; DR-0003) |
+| R2 | done | `M0-separator-evaluation.md` §1 (Demucs, MDX-Net, Open-Unmix screened, HPSS + mixture baselines) |
+| R3 | done, with gaps | `BENCHMARK_PROTOCOL.md`; corpus expansion approved in DR-0002 but **0 items acquired**; blind listening packet ready (`LISTENING_TEST.md`), **owner results pending** |
+| R4 | met for research harness | `docs/proof/M0-proof.md`; upload/playback is M1 scope |
+| R5 | not started | Spotify/sample-library terms research deferred; no integration code exists |

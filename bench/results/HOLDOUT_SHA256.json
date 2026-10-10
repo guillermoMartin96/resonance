@@ -1,0 +1,20 @@
+{
+  "babyslakh__holdout__baseline.hpss.json": "165ac707da4c3d4c5185dc55254fab2636a58db89840b46fbed1843b0cef0496",
+  "babyslakh__holdout__baseline.mixture.json": "7ee5f34394683c53bccb264478f8647a41a90a675978491cb03a4306a97535d0",
+  "babyslakh__holdout__demucs.htdemucs.json": "5423508ea91c71beb57b3dd8dcda25e80c6652c1f4046e524a6179510efb9fe4",
+  "babyslakh__holdout__demucs.htdemucs_ft.json": "70a69292b380dfcc133c68303269ebaeaa27441619a07712110492d3b88a53a7",
+  "babyslakh__holdout__mdx.Kim_Vocal_2.json": "60d8fdd0b8be8378abdc1292c9ef05ba00e521779485f399ffa2aaf17ebb46cc",
+  "babyslakh__holdout__mdx.UVR-MDX-NET-Inst_HQ_3.json": "f2ac9b7115e050cc7e476a90120840400943099770bae3349911b7eb4fae8a3d",
+  "procedural__holdout__baseline.hpss.json": "bbd7e2b0af7c5a21f0bada1321ff115ad1e6491375092d94508cf167dad3c8e5",
+  "procedural__holdout__baseline.mixture.json": "2bbd8f10531df99bc3b37a45b3a4978a78db125577120373e1415dceb86e84d3",
+  "procedural__holdout__demucs.htdemucs.json": "3b4a17f4c1539dd936a1e7c2f3d20c393916413fe2cbd323a2428aa127c2953b",
+  "procedural__holdout__demucs.htdemucs_ft.json": "80101d518ef1b3b3cb6006401f45984ee336837c488a5b549a71f9b2d09b7231",
+  "procedural__holdout__mdx.Kim_Vocal_2.json": "ee51bc514a9fe9ff19353ac6cee845ebab4bdcb28543a07661d54b5109999f95",
+  "procedural__holdout__mdx.UVR-MDX-NET-Inst_HQ_3.json": "46007bde06c67b1d3c541fabb7c5ce889f5f68694530d020e397818baba93251",
+  "vocalmix__holdout__baseline.hpss.json": "d591dcbba9bbd58f223a3a36c8a40fd0e08472be01c238aa68a4f74d6ba95e63",
+  "vocalmix__holdout__baseline.mixture.json": "5b0c9c2cc7beaea4c18f89f69a5e82aa3cf0812033d45f4d34ac3239f0de3ed3",
+  "vocalmix__holdout__demucs.htdemucs.json": "fac982c1443384da70a5d5b6bae639eba2b4e0c67b025c6d55aff6d4bc19438b",
+  "vocalmix__holdout__demucs.htdemucs_ft.json": "7079a0b75f1d072a6bd4297164de1ba60876db782eb31e7444143cea5012cd88",
+  "vocalmix__holdout__mdx.Kim_Vocal_2.json": "34113daaafe91b108dfeaca348985552b9e695c20a6b10fe7204a2bc50540f0d",
+  "vocalmix__holdout__mdx.UVR-MDX-NET-Inst_HQ_3.json": "5d923d68639952b9bff6992e996a397f874c76f6624ff81cac32111d3d031d2d"
+}

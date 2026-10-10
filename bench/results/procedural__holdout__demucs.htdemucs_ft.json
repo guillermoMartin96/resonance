@@ -1,0 +1,272 @@
+{
+  "separator": {
+    "id": "demucs.htdemucs_ft",
+    "engine": "demucs",
+    "engine_version": "4.1.0",
+    "model_name": "htdemucs_ft",
+    "native_sample_rate": 44100,
+    "roles": [
+      "vocals",
+      "drums",
+      "bass",
+      "other",
+      "accompaniment"
+    ],
+    "code_license": "MIT",
+    "weights_license": "unstated (HF adefossez/* model cards carry no license; trained on MUSDB18-HQ + ~800 undisclosed songs)",
+    "weights_sha256": [
+      "04573f0d.safetensors:68854b0d7c2b3274723b5761f6fd9f5aec5f1bcd3f0de7c1669546fdb7871b7c",
+      "92cfc3b6.safetensors:a241863551f30d01c42bd7b97da40839922ead3acb0f1fcab25682f55b4eeb59",
+      "d12395a8.safetensors:5b01a97567ae9a3178a6236fb520251045c03eb8834bc8c24a4eec11d6c8fb56",
+      "f7e0c4bc.safetensors:2c85ab3c62dd6edd8e0b965e38b16fd1cdde357cc25de6b6bc9ce7c83f60925f"
+    ],
+    "params": {
+      "shifts": 1,
+      "overlap": 0.25,
+      "seed": 0,
+      "device": "cpu"
+    }
+  },
+  "dataset": "procedural",
+  "split": "holdout",
+  "n_items": 4,
+  "frozen_config_sha256": "cb98142e7278401f639c2b62bea53f882af43261af35946acffafa856dd218ee",
+  "git_rev": "e26d6d2628b97ce17ae336c9b99d06f1f13ef8ba",
+  "env": {
+    "python": "3.12.15",
+    "machine": "x86_64",
+    "platform": "macOS-26.2-x86_64-i386-64bit",
+    "processor": "i386",
+    "numpy": "1.26.4",
+    "scipy": "1.17.1"
+  },
+  "timing": {
+    "dataset_load_s": 3.0756066970002394,
+    "model_load_s": 4.433592412000053,
+    "total_separate_s": 291.6705479940006,
+    "total_audio_s": 96.0
+  },
+  "memory_mb": {
+    "peak_before_model": 504.864768,
+    "peak_after_load": 1264.287744,
+    "peak_total": 3364.5568
+  },
+  "items": [
+    {
+      "item": "procedural-1000",
+      "license": "CC0-1.0",
+      "duration_s": 24.0,
+      "separate_s": 74.55586415200014,
+      "rtf": 3.1064943396666727,
+      "metrics": {
+        "vocals": {
+          "sdr": -0.0002137883158057262,
+          "si_sdr": -33.3353689385074,
+          "silent_leak_db": -62.846500404176844,
+          "est_rms_dbfs": -85.43159575707483,
+          "sir": -16.943987092662493,
+          "sar": -16.26765223576864,
+          "bleed_ratio": 0.02261538141164401
+        },
+        "drums": {
+          "sdr": 17.73189508581401,
+          "si_sdr": 17.658581982197838,
+          "silent_leak_db": -55.90994597963835,
+          "est_rms_dbfs": -27.84133918230518,
+          "sir": 37.61432059068267,
+          "sar": 17.702857202979867,
+          "bleed_ratio": 0.00017026612352003895
+        },
+        "bass": {
+          "sdr": 9.040674193734882,
+          "si_sdr": 8.462237020608782,
+          "silent_leak_db": -60.601226301881056,
+          "est_rms_dbfs": -28.922529342362647,
+          "sir": 31.993324383497196,
+          "sar": 8.485092480628097,
+          "bleed_ratio": 0.0005532184444959667
+        },
+        "other": {
+          "sdr": -1.295230592863401,
+          "si_sdr": -1.5110536924168547,
+          "silent_leak_db": -13.200319136721246,
+          "est_rms_dbfs": -23.93997122281627,
+          "sir": -1.1455376409396756,
+          "sar": 13.607538511899946,
+          "bleed_ratio": 0.5441968829754742
+        },
+        "accompaniment": {
+          "sdr": 3.325367454826669,
+          "si_sdr": 3.3779542301136507,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -21.416120676264892,
+          "sir": 3.4052965379288223,
+          "sar": 25.456742788852637,
+          "bleed_ratio": 0.31189574305050005
+        }
+      }
+    },
+    {
+      "item": "procedural-1001",
+      "license": "CC0-1.0",
+      "duration_s": 24.0,
+      "separate_s": 75.7752479589999,
+      "rtf": 3.1573019982916626,
+      "metrics": {
+        "vocals": {
+          "sdr": 0.00014047358820331007,
+          "si_sdr": -44.77306295886149,
+          "silent_leak_db": -49.83684554682164,
+          "est_rms_dbfs": -74.46739779924303,
+          "sir": -7.689799946725092,
+          "sar": -36.373343285804076,
+          "bleed_ratio": 0.00019692296070775842
+        },
+        "drums": {
+          "sdr": 17.268054306295085,
+          "si_sdr": 17.20236636427844,
+          "silent_leak_db": -48.03418216601821,
+          "est_rms_dbfs": -29.128259837534788,
+          "sir": 38.05244366045613,
+          "sar": 17.239374886318796,
+          "bleed_ratio": 0.00015367721421949746
+        },
+        "bass": {
+          "sdr": 3.4989708581531427,
+          "si_sdr": 0.9584139106646289,
+          "silent_leak_db": -48.80213990937801,
+          "est_rms_dbfs": -32.88472904588368,
+          "sir": 32.325390023672995,
+          "sar": 0.9655011846693341,
+          "bleed_ratio": 0.00032497545691238556
+        },
+        "other": {
+          "sdr": -1.4354593909444027,
+          "si_sdr": -1.583973410484992,
+          "silent_leak_db": -3.617254765318396,
+          "est_rms_dbfs": -25.30542886041275,
+          "sir": -1.0359907563865782,
+          "sar": 11.944426402826503,
+          "bleed_ratio": 0.5296972411737191
+        },
+        "accompaniment": {
+          "sdr": 3.0623598017826033,
+          "si_sdr": 2.45430345157605,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -23.204425063150698,
+          "sir": 3.032147633158893,
+          "sar": 15.077454862888324,
+          "bleed_ratio": 0.32466465593081434
+        }
+      }
+    },
+    {
+      "item": "procedural-1002",
+      "license": "CC0-1.0",
+      "duration_s": 24.0,
+      "separate_s": 71.66578606800022,
+      "rtf": 2.986074419500009,
+      "metrics": {
+        "vocals": {
+          "sdr": 0.00034858837826855964,
+          "si_sdr": -32.033791622399846,
+          "silent_leak_db": -58.737052127794996,
+          "est_rms_dbfs": -83.444217120297,
+          "sir": -16.10476969899862,
+          "sar": -15.470315734399815,
+          "bleed_ratio": 0.026934617879665605
+        },
+        "drums": {
+          "sdr": 18.105074331914487,
+          "si_sdr": 18.044839933471334,
+          "silent_leak_db": -57.865248960603,
+          "est_rms_dbfs": -28.647181365858753,
+          "sir": 38.22507360194087,
+          "sar": 18.08807917621067,
+          "bleed_ratio": 0.00014818514590760388
+        },
+        "bass": {
+          "sdr": 2.071159277996486,
+          "si_sdr": -2.0250779941474435,
+          "silent_leak_db": -57.735489962049655,
+          "est_rms_dbfs": -35.02379411256834,
+          "sir": 37.37035458991833,
+          "sar": -2.0223146993677057,
+          "bleed_ratio": 7.065280933429731e-05
+        },
+        "other": {
+          "sdr": -2.2766226428068577,
+          "si_sdr": -2.3560068304320634,
+          "silent_leak_db": -0.7407254569267374,
+          "est_rms_dbfs": -24.659093006317583,
+          "sir": -1.7273734004370107,
+          "sar": 10.937841337612447,
+          "bleed_ratio": 0.5573419102695114
+        },
+        "accompaniment": {
+          "sdr": 3.400803946344431,
+          "si_sdr": 3.0941343414908222,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -22.832478741649517,
+          "sir": 3.378466397396807,
+          "sar": 17.687923590098084,
+          "bleed_ratio": 0.3103035509810029
+        }
+      }
+    },
+    {
+      "item": "procedural-1003",
+      "license": "CC0-1.0",
+      "duration_s": 24.0,
+      "separate_s": 69.67364981500032,
+      "rtf": 2.90306874229168,
+      "metrics": {
+        "vocals": {
+          "sdr": 0.0006062030255822756,
+          "si_sdr": -32.262915625188135,
+          "silent_leak_db": -52.02676705656167,
+          "est_rms_dbfs": -79.25185102111482,
+          "sir": -7.001575766995237,
+          "sar": -24.439893231920244,
+          "bleed_ratio": 0.002988605152480614
+        },
+        "drums": {
+          "sdr": 17.660357210510877,
+          "si_sdr": 17.585388317258012,
+          "silent_leak_db": -57.60236600441907,
+          "est_rms_dbfs": -30.617722708605232,
+          "sir": 38.77263914483941,
+          "sar": 17.618887455897006,
+          "bleed_ratio": 0.00013037804693872055
+        },
+        "bass": {
+          "sdr": 7.998592770172985,
+          "si_sdr": 7.260927980859314,
+          "silent_leak_db": -51.45152457303422,
+          "est_rms_dbfs": -32.09320049150071,
+          "sir": 32.320221879315476,
+          "sar": 7.277677297206946,
+          "bleed_ratio": 0.000493474196773375
+        },
+        "other": {
+          "sdr": -1.5617938182516486,
+          "si_sdr": -0.9779379180263176,
+          "silent_leak_db": -6.000377133048263,
+          "est_rms_dbfs": -26.123429754728683,
+          "sir": -1.2170468707428348,
+          "sar": 13.464785790435208,
+          "bleed_ratio": 0.5169008312325978
+        },
+        "accompaniment": {
+          "sdr": 3.0838886392420934,
+          "si_sdr": 3.3262173070064414,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -23.916436816881664,
+          "sir": 3.1261687729176395,
+          "sar": 26.50511593147182,
+          "bleed_ratio": 0.3156557205946771
+        }
+      }
+    }
+  ]
+}

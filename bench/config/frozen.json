@@ -1,0 +1,18 @@
+{
+  "frozen_at": "2026-10-09",
+  "rationale": "M0 compares engines at their documented defaults; nothing is tuned. Frozen before any real-audio (babyslakh/vocalmix) run on dev or holdout. Only the procedural fixture level balance was changed after a dev run.",
+  "separators": {
+    "baseline.mixture": {},
+    "baseline.hpss": {"n_fft": 4096, "kernel": 17, "bass_cutoff_hz": 180.0},
+    "demucs.htdemucs": {"shifts": 1, "overlap": 0.25, "seed": 0, "device": "cpu"},
+    "demucs.htdemucs_ft": {"shifts": 1, "overlap": 0.25, "seed": 0, "device": "cpu"},
+    "mdx.Kim_Vocal_2": {"hop": 1024, "segment": 256, "overlap": 0.25},
+    "mdx.UVR-MDX-NET-Inst_HQ_3": {"hop": 1024, "segment": 256, "overlap": 0.25}
+  },
+  "datasets": {
+    "procedural": {"holdout_seeds": [1000, 1001, 1002, 1003], "seconds": 24},
+    "babyslakh": {"holdout": "Track00006-Track00020", "excerpt_s": 30},
+    "vocalmix": {"holdout_vocals": ["commons-leyiz-m-plorer-solo", "commons-shenandoah-usaf", "commons-angels-army-chorus"], "pairs_per_vocal": 2}
+  },
+  "metrics_module": "stemforge_bench/metrics.py"
+}

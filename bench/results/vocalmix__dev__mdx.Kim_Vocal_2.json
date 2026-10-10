@@ -1,0 +1,162 @@
+{
+  "separator": {
+    "id": "mdx.Kim_Vocal_2",
+    "engine": "mdx-onnx",
+    "engine_version": "stemforge-mdx-1/onnxruntime-1.23.2",
+    "model_name": "Kim_Vocal_2.onnx",
+    "native_sample_rate": 44100,
+    "roles": [
+      "vocals",
+      "accompaniment"
+    ],
+    "code_license": "MIT (algorithm from audio-separator/UVR)",
+    "weights_license": "unstated (TRvlvr/model_repo has no LICENSE; trainer/training data undisclosed)",
+    "weights_sha256": [
+      "ce74ef3b6a6024ce44211a07be9cf8bc6d87728cc852a68ab34eb8e58cde9c8b"
+    ],
+    "params": {
+      "hop": 1024,
+      "segment": 256,
+      "overlap": 0.25,
+      "compensate": 1.009,
+      "mdx_dim_f_set": 3072,
+      "mdx_dim_t_set": 8,
+      "mdx_n_fft_scale_set": 7680,
+      "primary_stem": "Vocals"
+    }
+  },
+  "dataset": "vocalmix",
+  "split": "dev",
+  "n_items": 4,
+  "frozen_config_sha256": null,
+  "git_rev": "e26d6d2628b97ce17ae336c9b99d06f1f13ef8ba",
+  "env": {
+    "python": "3.12.15",
+    "machine": "x86_64",
+    "platform": "macOS-26.2-x86_64-i386-64bit",
+    "processor": "i386",
+    "numpy": "1.26.4",
+    "scipy": "1.17.1"
+  },
+  "timing": {
+    "dataset_load_s": 2.45232642100018,
+    "model_load_s": 0.40469451100216247,
+    "total_separate_s": 90.92826183998841,
+    "total_audio_s": 120.0
+  },
+  "memory_mb": {
+    "peak_before_model": 592.91648,
+    "peak_after_load": 815.824896,
+    "peak_total": 3718.930432
+  },
+  "items": [
+    {
+      "item": "vocalmix-commons-twinkle-solo+Track00001",
+      "license": "vocals: CC0-1.0; accompaniment: CC-BY-4.0",
+      "duration_s": 30.0,
+      "separate_s": 22.24045210299664,
+      "rtf": 0.7413484034332214,
+      "metrics": {
+        "vocals": {
+          "sdr": 19.389658934200853,
+          "si_sdr": 19.367325892286257,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -22.885682512274713,
+          "sir": 39.87082201811547,
+          "sar": 19.406652099079484,
+          "bleed_ratio": 0.00010184169159223853
+        },
+        "accompaniment": {
+          "sdr": 20.027764071822748,
+          "si_sdr": 19.985503621000852,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -22.219223611689266,
+          "sir": 38.9519639683945,
+          "sar": 20.042898221301435,
+          "bleed_ratio": 0.00012602994878516485
+        }
+      }
+    },
+    {
+      "item": "vocalmix-commons-twinkle-solo+Track00002",
+      "license": "vocals: CC0-1.0; accompaniment: CC-BY-4.0",
+      "duration_s": 30.0,
+      "separate_s": 23.04038551800477,
+      "rtf": 0.768012850600159,
+      "metrics": {
+        "vocals": {
+          "sdr": 16.68227954087268,
+          "si_sdr": 16.61520970716941,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -23.813483171946118,
+          "sir": 33.629881430447234,
+          "sar": 16.70333840324835,
+          "bleed_ratio": 0.00042417903862727326
+        },
+        "accompaniment": {
+          "sdr": 17.28069492988775,
+          "si_sdr": 17.199191555524227,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -23.116925742778594,
+          "sir": 32.48850142812645,
+          "sar": 17.34069579721447,
+          "bleed_ratio": 0.0005531070211290418
+        }
+      }
+    },
+    {
+      "item": "vocalmix-commons-eternal-father-navy+Track00003",
+      "license": "vocals: Public domain (US federal government work); accompaniment: CC-BY-4.0",
+      "duration_s": 30.0,
+      "separate_s": 22.711119686995517,
+      "rtf": 0.7570373228998506,
+      "metrics": {
+        "vocals": {
+          "sdr": 7.7833541218337,
+          "si_sdr": 6.997448956951927,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -22.343038251738587,
+          "sir": 16.61155376614833,
+          "sar": 7.592778931053671,
+          "bleed_ratio": 0.01818436179543024
+        },
+        "accompaniment": {
+          "sdr": 7.8710473025579475,
+          "si_sdr": 7.2149667070428,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -21.53607109730433,
+          "sir": 14.393229153429395,
+          "sar": 8.441099709230226,
+          "bleed_ratio": 0.030671504256229633
+        }
+      }
+    },
+    {
+      "item": "vocalmix-commons-eternal-father-navy+Track00004",
+      "license": "vocals: Public domain (US federal government work); accompaniment: CC-BY-4.0",
+      "duration_s": 30.0,
+      "separate_s": 22.936304531991482,
+      "rtf": 0.7645434843997161,
+      "metrics": {
+        "vocals": {
+          "sdr": 9.498595638730308,
+          "si_sdr": 8.983248217183267,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -23.43730137001922,
+          "sir": 19.56648635784093,
+          "sar": 9.426950594766327,
+          "bleed_ratio": 0.009807115635807993
+        },
+        "accompaniment": {
+          "sdr": 9.586650378993518,
+          "si_sdr": 9.126465756761862,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -22.986124199479395,
+          "sir": 18.40981148075929,
+          "sar": 9.84807414196635,
+          "bleed_ratio": 0.012880616435953826
+        }
+      }
+    }
+  ]
+}

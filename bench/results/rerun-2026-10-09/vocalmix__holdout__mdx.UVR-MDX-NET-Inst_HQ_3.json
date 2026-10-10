@@ -1,0 +1,225 @@
+{
+  "separator": {
+    "id": "mdx.UVR-MDX-NET-Inst_HQ_3",
+    "engine": "mdx-onnx",
+    "engine_version": "stemforge-mdx-1/onnxruntime-1.23.2",
+    "model_name": "UVR-MDX-NET-Inst_HQ_3.onnx",
+    "native_sample_rate": 44100,
+    "roles": [
+      "vocals",
+      "accompaniment"
+    ],
+    "code_license": "MIT (algorithm from audio-separator/UVR)",
+    "weights_license": "unstated (TRvlvr/model_repo has no LICENSE; trainer/training data undisclosed)",
+    "weights_sha256": [
+      "317554b07fe1ea5279a77f2b1520a41ea4b93432560c4ffd08792c30fddf9adc"
+    ],
+    "params": {
+      "hop": 1024,
+      "segment": 256,
+      "overlap": 0.25,
+      "compensate": 1.022,
+      "mdx_dim_f_set": 3072,
+      "mdx_dim_t_set": 8,
+      "mdx_n_fft_scale_set": 6144,
+      "primary_stem": "Instrumental",
+      "param_table_sha256": "1aca8f9bcc57233bc714029663a9ec2345d9c7721f91e5e08f46392a879c6a9a",
+      "param_table_revision": "4621ca87e42bba17738b6ca0d0b5348763eb68ad"
+    }
+  },
+  "dataset": "vocalmix",
+  "split": "holdout",
+  "n_items": 6,
+  "frozen_config_sha256": "cb98142e7278401f639c2b62bea53f882af43261af35946acffafa856dd218ee",
+  "git_rev": "bf2429524971c551a94d4ba3dd7b45576b0f2217",
+  "git_dirty": false,
+  "env": {
+    "python": "3.12.15",
+    "machine": "x86_64",
+    "platform": "macOS-26.2-x86_64-i386-64bit",
+    "processor": "i386",
+    "numpy": "1.26.4",
+    "scipy": "1.17.1"
+  },
+  "timing": {
+    "dataset_load_s": 7.004106693000722,
+    "model_load_s": 0.3005446400002256,
+    "total_separate_s": 122.52245162799954,
+    "total_audio_s": 180.0
+  },
+  "memory_mb": {
+    "peak_before_model": 1308.07808,
+    "peak_after_load": 1397.911552,
+    "peak_total": 4073.61536
+  },
+  "items": [
+    {
+      "item": "vocalmix-commons-leyiz-m-plorer-solo+Track00006",
+      "input_sha256": "01c2adf673028d8297137bdef423d7c45649a3c16b52009d69639b74a06e250a",
+      "license": "vocals: CC-BY-SA-4.0; accompaniment: CC-BY-4.0",
+      "duration_s": 30.0,
+      "separate_s": 19.564107528000022,
+      "rtf": 0.6521369176000007,
+      "metrics": {
+        "vocals": {
+          "sdr": 15.670460808587453,
+          "si_sdr": 15.55674555668247,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -22.43323077502369,
+          "sir": 31.41433885355446,
+          "sar": 15.673574943703528,
+          "bleed_ratio": 0.0007024238996736469
+        },
+        "accompaniment": {
+          "sdr": 16.47086743132377,
+          "si_sdr": 16.459295281301923,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -21.786849896859792,
+          "sir": 33.5562872112674,
+          "sar": 16.555889039213746,
+          "bleed_ratio": 0.0004311822707983592
+        }
+      }
+    },
+    {
+      "item": "vocalmix-commons-leyiz-m-plorer-solo+Track00007",
+      "input_sha256": "a69301ae55249086d982e8f0b11f607ee9a328f0795dcbf8b22e02c80f92000a",
+      "license": "vocals: CC-BY-SA-4.0; accompaniment: CC-BY-4.0",
+      "duration_s": 30.0,
+      "separate_s": 19.35652661899985,
+      "rtf": 0.6452175539666617,
+      "metrics": {
+        "vocals": {
+          "sdr": 17.854821826283114,
+          "si_sdr": 17.785086857488942,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -21.85402115570717,
+          "sir": 40.25413666449549,
+          "sar": 17.810326031483395,
+          "bleed_ratio": 9.277475268679758e-05
+        },
+        "accompaniment": {
+          "sdr": 18.677445680744256,
+          "si_sdr": 18.69904439034199,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -21.09344921737772,
+          "sir": 34.609174474675804,
+          "sar": 18.813901875411528,
+          "bleed_ratio": 0.00034142167450017485
+        }
+      }
+    },
+    {
+      "item": "vocalmix-commons-shenandoah-usaf+Track00008",
+      "input_sha256": "47e23a6244c33be2b8a98ea3b59fe9649cda2fe0efe71de2960424e00366bd1a",
+      "license": "vocals: Public domain (US federal government work); accompaniment: CC-BY-4.0",
+      "duration_s": 30.0,
+      "separate_s": 20.573343533999832,
+      "rtf": 0.6857781177999944,
+      "metrics": {
+        "vocals": {
+          "sdr": 10.57202138996923,
+          "si_sdr": 10.182450006854056,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -19.769918050911773,
+          "sir": 21.84637687934036,
+          "sar": 10.516382961305737,
+          "bleed_ratio": 0.005963526943878324
+        },
+        "accompaniment": {
+          "sdr": 10.652667076192836,
+          "si_sdr": 10.262203720842358,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -19.566838936691052,
+          "sir": 19.37647739891428,
+          "sar": 10.947178647780566,
+          "bleed_ratio": 0.010561250270325817
+        }
+      }
+    },
+    {
+      "item": "vocalmix-commons-shenandoah-usaf+Track00009",
+      "input_sha256": "1a3db1b9e03f43837648ac0eb6844e825f25b9ccf39bb9a77027aef7bc0730a9",
+      "license": "vocals: Public domain (US federal government work); accompaniment: CC-BY-4.0",
+      "duration_s": 30.0,
+      "separate_s": 22.13004839000041,
+      "rtf": 0.7376682796666804,
+      "metrics": {
+        "vocals": {
+          "sdr": 9.264050746997324,
+          "si_sdr": 8.75753224360392,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -22.7909871302136,
+          "sir": 21.355051533762712,
+          "sar": 9.034895676627881,
+          "bleed_ratio": 0.00645989718684414
+        },
+        "accompaniment": {
+          "sdr": 9.385624610635059,
+          "si_sdr": 8.902486478270804,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -22.115928665610607,
+          "sir": 16.072304935332543,
+          "sar": 10.000355988569158,
+          "bleed_ratio": 0.02191725186245952
+        }
+      }
+    },
+    {
+      "item": "vocalmix-commons-angels-army-chorus+Track00010",
+      "input_sha256": "a66de6ec773e82c8f5d0e65a22fbabcbb58cb11ab799cbf95090df55a4cda343",
+      "license": "vocals: Public domain (US federal government work); accompaniment: CC-BY-4.0",
+      "duration_s": 30.0,
+      "separate_s": 20.966402223999467,
+      "rtf": 0.6988800741333155,
+      "metrics": {
+        "vocals": {
+          "sdr": 12.397096230937697,
+          "si_sdr": 12.139714725460031,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -20.78288725823114,
+          "sir": 23.750718508033614,
+          "sar": 12.467882210625962,
+          "bleed_ratio": 0.0039729443907886375
+        },
+        "accompaniment": {
+          "sdr": 12.47854431526189,
+          "si_sdr": 12.250064409903853,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -20.842451139261758,
+          "sir": 24.368866615408066,
+          "sar": 12.614540932325616,
+          "bleed_ratio": 0.003454005666550771
+        }
+      }
+    },
+    {
+      "item": "vocalmix-commons-angels-army-chorus+Track00011",
+      "input_sha256": "1711a578bbc69bf1f7694f7c21aab4a5e522ace62ead78809098a0bd163e3300",
+      "license": "vocals: Public domain (US federal government work); accompaniment: CC-BY-4.0",
+      "duration_s": 30.0,
+      "separate_s": 19.93202333299996,
+      "rtf": 0.6644007777666654,
+      "metrics": {
+        "vocals": {
+          "sdr": 11.051163764558007,
+          "si_sdr": 10.69781775724101,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -21.27834195271683,
+          "sir": 21.489854008915703,
+          "sar": 11.104576288426895,
+          "bleed_ratio": 0.006536660826354676
+        },
+        "accompaniment": {
+          "sdr": 11.160436074769638,
+          "si_sdr": 10.827445969290359,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -21.33092223932636,
+          "sir": 21.944490246807014,
+          "sar": 11.262090016056582,
+          "bleed_ratio": 0.005906170495660444
+        }
+      }
+    }
+  ]
+}

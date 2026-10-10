@@ -1,0 +1,9 @@
+[project]
+name = "stemforge-bench"
+version = "0.0.1"
+description = "StemForge M0 separation benchmark harness (research, not product code)"
+requires-python = ">=3.10,<3.13"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["slow: loads real model weights"]

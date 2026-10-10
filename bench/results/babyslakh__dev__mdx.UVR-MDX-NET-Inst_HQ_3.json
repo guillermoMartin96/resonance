@@ -1,0 +1,189 @@
+{
+  "separator": {
+    "id": "mdx.UVR-MDX-NET-Inst_HQ_3",
+    "engine": "mdx-onnx",
+    "engine_version": "stemforge-mdx-1/onnxruntime-1.23.2",
+    "model_name": "UVR-MDX-NET-Inst_HQ_3.onnx",
+    "native_sample_rate": 44100,
+    "roles": [
+      "vocals",
+      "accompaniment"
+    ],
+    "code_license": "MIT (algorithm from audio-separator/UVR)",
+    "weights_license": "unstated (TRvlvr/model_repo has no LICENSE; trainer/training data undisclosed)",
+    "weights_sha256": [
+      "317554b07fe1ea5279a77f2b1520a41ea4b93432560c4ffd08792c30fddf9adc"
+    ],
+    "params": {
+      "hop": 1024,
+      "segment": 256,
+      "overlap": 0.25,
+      "compensate": 1.022,
+      "mdx_dim_f_set": 3072,
+      "mdx_dim_t_set": 8,
+      "mdx_n_fft_scale_set": 6144,
+      "primary_stem": "Instrumental"
+    }
+  },
+  "dataset": "babyslakh",
+  "split": "dev",
+  "n_items": 5,
+  "frozen_config_sha256": null,
+  "git_rev": "e26d6d2628b97ce17ae336c9b99d06f1f13ef8ba",
+  "env": {
+    "python": "3.12.15",
+    "machine": "x86_64",
+    "platform": "macOS-26.2-x86_64-i386-64bit",
+    "processor": "i386",
+    "numpy": "1.26.4",
+    "scipy": "1.17.1"
+  },
+  "timing": {
+    "dataset_load_s": 2.5345535859960364,
+    "model_load_s": 0.6287022980104666,
+    "total_separate_s": 137.73168708801677,
+    "total_audio_s": 150.0
+  },
+  "memory_mb": {
+    "peak_before_model": 369.381376,
+    "peak_after_load": 663.113728,
+    "peak_total": 3541.123072
+  },
+  "items": [
+    {
+      "item": "babyslakh-Track00001",
+      "license": "CC-BY-4.0",
+      "duration_s": 30.0,
+      "separate_s": 31.608932012008154,
+      "rtf": 1.0536310670669384,
+      "metrics": {
+        "vocals": {
+          "sdr": null,
+          "si_sdr": null,
+          "silent_leak_db": -33.630564261023885,
+          "est_rms_dbfs": -52.87635124174222,
+          "sir": null,
+          "sar": null,
+          "bleed_ratio": null
+        },
+        "accompaniment": {
+          "sdr": 30.544464739572298,
+          "si_sdr": 33.58324900409403,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -19.432827843900775,
+          "sir": 137.3776831068073,
+          "sar": 33.58619189874049,
+          "bleed_ratio": 5.4858097368878175e-33
+        }
+      }
+    },
+    {
+      "item": "babyslakh-Track00002",
+      "license": "CC-BY-4.0",
+      "duration_s": 30.0,
+      "separate_s": 28.82948149900767,
+      "rtf": 0.960982716633589,
+      "metrics": {
+        "vocals": {
+          "sdr": null,
+          "si_sdr": null,
+          "silent_leak_db": -29.572500315888696,
+          "est_rms_dbfs": -51.20097485146844,
+          "sir": null,
+          "sar": null,
+          "bleed_ratio": null
+        },
+        "accompaniment": {
+          "sdr": 27.523794015438583,
+          "si_sdr": 29.36885445726386,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -21.851524879760284,
+          "sir": 134.95591951503624,
+          "sar": 29.413619590778666,
+          "bleed_ratio": 6.828109271839584e-33
+        }
+      }
+    },
+    {
+      "item": "babyslakh-Track00003",
+      "license": "CC-BY-4.0",
+      "duration_s": 30.0,
+      "separate_s": 27.61895603001176,
+      "rtf": 0.9206318676670586,
+      "metrics": {
+        "vocals": {
+          "sdr": null,
+          "si_sdr": null,
+          "silent_leak_db": -37.33722881543602,
+          "est_rms_dbfs": -57.08705957678963,
+          "sir": null,
+          "sar": null,
+          "bleed_ratio": null
+        },
+        "accompaniment": {
+          "sdr": 32.17322532965458,
+          "si_sdr": 37.206476284947044,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -19.929898878143714,
+          "sir": 136.88169088273858,
+          "sar": 37.225702421019186,
+          "bleed_ratio": 7.051542736638339e-33
+        }
+      }
+    },
+    {
+      "item": "babyslakh-Track00004",
+      "license": "CC-BY-4.0",
+      "duration_s": 30.0,
+      "separate_s": 25.571058247995097,
+      "rtf": 0.8523686082665033,
+      "metrics": {
+        "vocals": {
+          "sdr": null,
+          "si_sdr": null,
+          "silent_leak_db": -16.103171227298947,
+          "est_rms_dbfs": -34.380565293900446,
+          "sir": null,
+          "sar": null,
+          "bleed_ratio": null
+        },
+        "accompaniment": {
+          "sdr": 15.960052796180964,
+          "si_sdr": 16.048371160919153,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -18.68230184642143,
+          "sir": 138.02909232521276,
+          "sar": 16.283241153615233,
+          "bleed_ratio": 6.808329778515826e-33
+        }
+      }
+    },
+    {
+      "item": "babyslakh-Track00005",
+      "license": "CC-BY-4.0",
+      "duration_s": 30.0,
+      "separate_s": 24.10325929899409,
+      "rtf": 0.8034419766331363,
+      "metrics": {
+        "vocals": {
+          "sdr": null,
+          "si_sdr": null,
+          "silent_leak_db": -38.017583308265706,
+          "est_rms_dbfs": -55.55270436443636,
+          "sir": null,
+          "sar": null,
+          "bleed_ratio": null
+        },
+        "accompaniment": {
+          "sdr": 32.38357193577168,
+          "si_sdr": 37.715340687908906,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -17.713362909893725,
+          "sir": 139.09831670363576,
+          "sar": 37.72800989579379,
+          "bleed_ratio": 6.464744389325894e-33
+        }
+      }
+    }
+  ]
+}

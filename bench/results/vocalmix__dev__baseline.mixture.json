@@ -1,0 +1,262 @@
+{
+  "separator": {
+    "id": "baseline.mixture",
+    "engine": "baseline",
+    "engine_version": "1",
+    "model_name": "identity",
+    "native_sample_rate": 0,
+    "roles": [
+      "vocals",
+      "drums",
+      "bass",
+      "other",
+      "accompaniment"
+    ],
+    "code_license": "project",
+    "weights_license": "n/a (no weights)",
+    "weights_sha256": [],
+    "params": {}
+  },
+  "dataset": "vocalmix",
+  "split": "dev",
+  "n_items": 4,
+  "frozen_config_sha256": null,
+  "git_rev": "e26d6d2628b97ce17ae336c9b99d06f1f13ef8ba",
+  "env": {
+    "python": "3.12.15",
+    "machine": "x86_64",
+    "platform": "macOS-26.2-x86_64-i386-64bit",
+    "processor": "i386",
+    "numpy": "1.26.4",
+    "scipy": "1.17.1"
+  },
+  "timing": {
+    "dataset_load_s": 2.7332229379971977,
+    "model_load_s": 9.200011845678091e-07,
+    "total_separate_s": 0.012961417000042275,
+    "total_audio_s": 120.0
+  },
+  "memory_mb": {
+    "peak_before_model": 584.052736,
+    "peak_after_load": 584.052736,
+    "peak_total": 721.846272
+  },
+  "items": [
+    {
+      "item": "vocalmix-commons-twinkle-solo+Track00001",
+      "license": "vocals: CC0-1.0; accompaniment: CC-BY-4.0",
+      "duration_s": 30.0,
+      "separate_s": 0.0037120280030649155,
+      "rtf": 0.00012373426676883051,
+      "metrics": {
+        "vocals": {
+          "sdr": -0.5711052824516323,
+          "si_sdr": -0.575454981480542,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -19.457588297087163,
+          "sir": -0.5711052805175615,
+          "sar": 136.9994391641252,
+          "bleed_ratio": 0.5330775873947431
+        },
+        "drums": {
+          "sdr": -8.94948043594177,
+          "si_sdr": -9.188890465178808,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -19.457588297087163,
+          "sir": -8.949480433548885,
+          "sar": 137.02421263009344,
+          "bleed_ratio": 0.8925156420753664
+        },
+        "bass": {
+          "sdr": -8.62535111487236,
+          "si_sdr": -8.804258133887453,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -19.457588297087163,
+          "sir": -8.625351115388774,
+          "sar": 137.0188575944767,
+          "bleed_ratio": 0.8836796881420553
+        },
+        "other": {
+          "sdr": -3.6105419650370756,
+          "si_sdr": -3.6025722105298694,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -19.457588297087163,
+          "sir": -3.6105419636965057,
+          "sar": 136.994989052535,
+          "bleed_ratio": 0.6962542969221447
+        },
+        "accompaniment": {
+          "sdr": 0.5711052798267882,
+          "si_sdr": 0.5672917955391944,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -19.457588297087163,
+          "sir": 0.5711052805175607,
+          "sar": 136.9994391641252,
+          "bleed_ratio": 0.46739051574018764
+        }
+      }
+    },
+    {
+      "item": "vocalmix-commons-twinkle-solo+Track00002",
+      "license": "vocals: CC0-1.0; accompaniment: CC-BY-4.0",
+      "duration_s": 30.0,
+      "separate_s": 0.0032437699992442504,
+      "rtf": 0.00010812566664147501,
+      "metrics": {
+        "vocals": {
+          "sdr": -0.5711052852403667,
+          "si_sdr": -0.4993439784187558,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -20.28007541737283,
+          "sir": -0.5711052841478499,
+          "sar": 136.20346248333854,
+          "bleed_ratio": 0.5287445994805413
+        },
+        "drums": {
+          "sdr": -8.96066244993497,
+          "si_sdr": -9.0223793314745,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -20.28007541737283,
+          "sir": -8.960662449335292,
+          "sar": 136.24381542288953,
+          "bleed_ratio": 0.8887006351251971
+        },
+        "bass": {
+          "sdr": -9.128716147768007,
+          "si_sdr": -9.330479660831575,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -20.28007541737283,
+          "sir": -9.128716147890604,
+          "sar": 136.25867932648356,
+          "bleed_ratio": 0.8955791229351561
+        },
+        "other": {
+          "sdr": -3.380596315036872,
+          "si_sdr": -3.4638993622640135,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -20.28007541737283,
+          "sir": -3.380596310926924,
+          "sar": 136.26309772160621,
+          "bleed_ratio": 0.6894881821565622
+        },
+        "accompaniment": {
+          "sdr": 0.5711052827432188,
+          "si_sdr": 0.6340877828384488,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -20.28007541737283,
+          "sir": 0.5711052841478492,
+          "sar": 136.20346248333854,
+          "bleed_ratio": 0.463591448380425
+        }
+      }
+    },
+    {
+      "item": "vocalmix-commons-eternal-father-navy+Track00003",
+      "license": "vocals: Public domain (US federal government work); accompaniment: CC-BY-4.0",
+      "duration_s": 30.0,
+      "separate_s": 0.0021980229939799756,
+      "rtf": 7.326743313266586e-05,
+      "metrics": {
+        "vocals": {
+          "sdr": -0.08751814883699918,
+          "si_sdr": -0.06905132920316033,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -18.361603661276156,
+          "sir": -0.08751814615388133,
+          "sar": 137.96891269190897,
+          "bleed_ratio": 0.503977063002102
+        },
+        "drums": {
+          "sdr": -9.224386056954975,
+          "si_sdr": -9.13256498349517,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -18.361603661276156,
+          "sir": -9.224386046606481,
+          "sar": 137.96820385239442,
+          "bleed_ratio": 0.8911919706151895
+        },
+        "bass": {
+          "sdr": -9.281634982094898,
+          "si_sdr": -9.475168470502664,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -18.361603661276156,
+          "sir": -9.281634979900545,
+          "sar": 137.99831545885712,
+          "bleed_ratio": 0.898649176516177
+        },
+        "other": {
+          "sdr": -3.7782491342257423,
+          "si_sdr": -3.892684498535075,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -18.361603661276156,
+          "sir": -3.7782491344221993,
+          "sar": 138.0118326192129,
+          "bleed_ratio": 0.7102446955102859
+        },
+        "accompaniment": {
+          "sdr": 0.08751814565135152,
+          "si_sdr": 0.1056173154567048,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -18.361603661276156,
+          "sir": 0.08751814615388182,
+          "sar": 137.96891269190897,
+          "bleed_ratio": 0.4939226664320487
+        }
+      }
+    },
+    {
+      "item": "vocalmix-commons-eternal-father-navy+Track00004",
+      "license": "vocals: Public domain (US federal government work); accompaniment: CC-BY-4.0",
+      "duration_s": 30.0,
+      "separate_s": 0.003807596003753133,
+      "rtf": 0.0001269198667917711,
+      "metrics": {
+        "vocals": {
+          "sdr": -0.08751814495563409,
+          "si_sdr": -0.08054238049568596,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -19.80517577382533,
+          "sir": -0.08751814529130825,
+          "sar": 136.65490207157367,
+          "bleed_ratio": 0.5046365782341965
+        },
+        "drums": {
+          "sdr": -8.507474048890362,
+          "si_sdr": -8.619739875112392,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -19.80517577382533,
+          "sir": -8.507474045597856,
+          "sar": 136.6721727734836,
+          "bleed_ratio": 0.8792090473167793
+        },
+        "bass": {
+          "sdr": -8.433432867425378,
+          "si_sdr": -8.498890368423309,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -19.80517577382533,
+          "sir": -8.433432871219082,
+          "sar": 136.66654586104062,
+          "bleed_ratio": 0.8762086983444073
+        },
+        "other": {
+          "sdr": -4.585462718505894,
+          "si_sdr": -4.598743755066213,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -19.80517577382533,
+          "sir": -4.585462719726701,
+          "sar": 136.66178100918796,
+          "bleed_ratio": 0.7424808584512553
+        },
+        "accompaniment": {
+          "sdr": 0.08751814597228297,
+          "si_sdr": 0.09435485172259983,
+          "silent_leak_db": null,
+          "est_rms_dbfs": -19.80517577382533,
+          "sir": 0.08751814529130852,
+          "sar": 136.65490207157367,
+          "bleed_ratio": 0.49456902436261235
+        }
+      }
+    }
+  ]
+}
