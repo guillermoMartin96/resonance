@@ -32,7 +32,7 @@ cd bench
     --frozen-config config/frozen.json                          # holdout requires the frozen config
 .venv/bin/python scripts/perf_probe.py --seconds 180            # RTF + peak RSS, fresh process per engine
 .venv/bin/python scripts/summarize.py                           # -> results/SUMMARY.md
-.venv/bin/python scripts/make_listening_packet.py --dataset vocalmix --role vocals   # blinded A/B packet
+.venv/bin/python scripts/make_listening_packet.py --dataset vocalmix --role vocals   # blinded, loudness-matched packet; see docs/research/LISTENING_TEST.md
 ```
 `scripts/run_all.sh dev|holdout` runs every dataset × separator sequentially.
 

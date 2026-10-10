@@ -57,10 +57,10 @@ Installation complexity is assessed from the actual install log (dependency fail
 ## Performance probe
 `bench/scripts/perf_probe.py --seconds 180` writes a 3-minute deterministic CC0 mixture to disk once, then runs each separator in a **fresh process** (read WAV → load → separate) and records wall time and peak RSS. Benchmarks are run sequentially, never concurrently, to avoid CPU contention.
 
-## Blind listening rubric (R3 subjective; not yet performed)
+## Blind listening rubric (R3 subjective; packet ready, owner results pending; step-by-step: `LISTENING_TEST.md`)
 Objective metrics miss what samplers care about (transients, "underwater" phasiness, vocal breaths). Before DR-0001 is approved, a human should run:
 1. `bench/.venv/bin/python -m stemforge_bench.run --dataset vocalmix --split dev --separator <id> --save-audio` for each candidate (writes to `bench/.cache/outputs/`).
-2. `bench/scripts/make_listening_packet.py` copies outputs into `bench/.cache/listening/` with randomised labels (A/B/C…) and writes the hidden key separately.
+2. `bench/scripts/make_listening_packet.py` copies outputs into `bench/.cache/listening/` with randomised labels (A/B/C…), loudness-matched per item, plus a blank `ratings.csv`; the key goes to `bench/.cache/listening_keys/` (outside the packet).
 3. For each item and stem, rate 1–5 on: **isolation** (how little of other instruments is audible), **integrity** (target sounds intact: transients, tails, breaths), **artifacts** (phasiness, warbling, metallic noise; 5 = none), **usability** ("would I sample this region?" yes/no). Note timestamps of failures.
 4. Unblind with the key and record the table in `docs/research/M0-separator-evaluation.md`.
 
