@@ -21,7 +21,7 @@ cd bench
 .venv/bin/python scripts/fetch_data.py     # BabySlakh (CC BY 4.0, ~880 MB) + 5 Commons vocals; verifies md5/sha1
 .venv/bin/python scripts/fetch_models.py   # MDX ONNX weights + UVR parameter table; verifies sha256
 ```
-Demucs weights are fetched from Hugging Face (`adefossez/HTDemucs*`) on first use and hashed into every result.
+Demucs weights are fetched from Hugging Face (`adefossez/HTDemucs*`) on first use **at a pinned revision**, and every file is sha256-verified before loading (`separators/demucs_adapter.py: PINNED`). The MDX loader likewise refuses weights or a parameter table whose sha256 differs from the pins in `separators/mdx_onnx.py`.
 
 ## Run
 ```bash
@@ -35,6 +35,13 @@ cd bench
 .venv/bin/python scripts/make_listening_packet.py --dataset vocalmix --role vocals   # blinded, loudness-matched packet; see docs/research/LISTENING_TEST.md
 ```
 `scripts/run_all.sh dev|holdout` runs every dataset × separator sequentially.
+
+Holdout runs validate every setting in the frozen config against the code and refuse uncommitted harness changes (`--allow-dirty` overrides; recorded as `git_dirty`). To check reproducibility without touching the committed results, re-run into another directory and compare:
+```bash
+.venv/bin/python -m stemforge_bench.run --dataset vocalmix --split holdout --separator mdx.Kim_Vocal_2 \
+    --frozen-config config/frozen.json --out results/rerun-<date>
+.venv/bin/python scripts/compare_results.py results/rerun-<date>
+```
 
 ## Layout
 ```

@@ -106,4 +106,4 @@ Per-item RTF on 30 s clips is higher (MDX ≈ 0.8, Demucs ≈ 0.7) because of fi
 - SIR/SAR come from an instantaneous projection (no FIR allowance), so they're comparable across engines here but not with published BSS-Eval numbers.
 - No blind listening was done (the rubric is in the protocol). Numbers aren't a substitute for it.
 - Single machine, CPU only, default parameters, no tuning (deliberate).
-
+- **Demucs run-to-run variation (found in independent review, M0-04).** The original Demucs numbers came from one *unseeded* random shift offset. A seeded re-run moved the per-stem medians by ≤ 0.25 dB, far below the gaps the conclusions rest on. The exception is BabySlakh **bass, htdemucs vs htdemucs_ft, which is a tie within noise**. Demucs is now bit-repeatable. Evidence: `docs/reviews/M0-review.md`, `bench/results/rerun-2026-10-09/`.
