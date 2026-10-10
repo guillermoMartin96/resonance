@@ -35,3 +35,15 @@ Also check `bench/scripts/make_listening_packet.py` (blinding correctness) and t
 4. `## Verdict`: blocking findings (Critical/High) or "none", and whether M0 is fit to merge after they are fixed.
 
 Only report findings you have evidence for. If you can't verify something, say so under a `## Not verified` heading instead of guessing.
+
+---
+
+# Round 2 — re-review of fixes
+
+Round 1 findings (your earlier output) are in `docs/reviews/evidence/M0-codex-review-round1.md`; the authors' claimed dispositions are in `docs/reviews/M0-review.md`. **Don't take the dispositions on trust.** For the fix diff `git diff fe8a8f7..HEAD`:
+1. For each of M0-01…M0-06, verify against the code (and by running tests or probes) whether the finding is actually resolved. Answer **Resolved / Partially resolved / Not resolved**, with evidence.
+2. Look for regressions or new defects introduced by the fixes: `separators/demucs_adapter.py` (pinned loading must build the same model as `demucs.pretrained.get_model`), `separators/mdx_onnx.py`, `run.py` (`check_frozen`, `item_digest`, dirty-tree gate), `scripts/fetch_models.py`, `scripts/compare_results.py`, `stemforge_bench/platform_info.py`, `tests/test_provenance.py`.
+3. Check the re-run evidence in `bench/results/rerun-2026-10-09/` against the originals in `bench/results/`. Are the claims in `docs/reviews/M0-review.md` ("deterministic engines identical", "Demucs median Δ ≤ 0.25 dB", "bass is a tie") supported? Were the original holdout JSONs left unmodified (`git log -- bench/results/*holdout*`)?
+4. Confirm that no new Critical/High issue exists anywhere in the branch.
+
+Use the same output format as round 1, plus a `## Round-1 finding status` table. End with `## Verdict`: remaining blocking findings, or "none".
