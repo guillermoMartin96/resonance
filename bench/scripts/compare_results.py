@@ -22,7 +22,11 @@ def main() -> int:
     print("| run | role | base median SDR | rerun median SDR | Δ median | max per-item abs Δ |")
     print("|---|---|---|---|---|---|")
     status = 0
-    for path in sorted(args.rerun.glob("*__*__*.json")):
+    paths = sorted(args.rerun.glob("*__*__*.json"))
+    if not paths:
+        print(f"no result files in {args.rerun}")
+        return 1
+    for path in paths:
         base, new = json.loads((args.base / path.name).read_text()), json.loads(path.read_text())
         b_items = {it["item"]: it for it in base["items"]}
         n_items = {it["item"]: it for it in new["items"]}
