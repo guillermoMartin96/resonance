@@ -215,14 +215,30 @@ def test_frozen_config_schema_is_complete(mutate):
         check_frozen(cfg, "procedural", create("baseline.hpss"))
 
 
-def test_holdout_refuses_unknown_git_state(monkeypatch, capsys):
+@pytest.mark.parametrize("dirty,rev", [(None, "abc"), (False, "unknown")])
+def test_holdout_refuses_unknown_git_state(monkeypatch, capsys, tmp_path, dirty, rev):
     from stemforge_bench import run
-    monkeypatch.setattr(run, "git_dirty", lambda: None)
+    monkeypatch.setattr(run, "git_dirty", lambda: dirty)
+    monkeypatch.setattr(run, "git_rev", lambda: rev)
+    loaded = []
+    monkeypatch.setitem(run.DATASETS, "procedural", lambda split: loaded.append(split) or [])
     argv = ["--dataset", "procedural", "--split", "holdout", "--separator", "baseline.mixture",
-            "--frozen-config", str(BENCH / "config" / "frozen.json"), "--limit", "1"]
+            "--frozen-config", str(BENCH / "config" / "frozen.json"), "--limit", "1",
+            "--out", str(tmp_path)]   # never the committed results dir, even if the gate fails
     with pytest.raises(SystemExit):
         run.main(argv)
     assert "git" in capsys.readouterr().err
+    assert not loaded, "gate must run before any data is loaded"
+    assert not list(tmp_path.iterdir())
+
+
+def test_original_holdout_results_untouched():
+    """The frozen M0 holdout evidence is append-only: re-runs go to another directory."""
+    pins = json.loads((BENCH / "results" / "HOLDOUT_SHA256.json").read_text())
+    assert len(pins) == 18
+    for name, sha in pins.items():
+        assert _sha((BENCH / "results" / name).read_bytes()) == sha, f"{name} was modified"
+    assert set(pins) == {p.name for p in (BENCH / "results").glob("*__holdout__*.json")}
 
 
 def _load_compare():

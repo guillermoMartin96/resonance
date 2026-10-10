@@ -138,7 +138,7 @@ def main(argv: list[str] | None = None) -> int:
     args = ap.parse_args(argv)
 
     frozen_sha = None
-    dirty = git_dirty()
+    dirty, rev = git_dirty(), git_rev()
     if args.split == "holdout":
         if not args.frozen_config or not args.frozen_config.exists():
             ap.error("holdout runs require --frozen-config (fixed before scoring)")
@@ -147,7 +147,7 @@ def main(argv: list[str] | None = None) -> int:
             check_frozen(cfg, args.dataset, create(args.separator))
         except ValueError as e:
             ap.error(str(e))
-        if dirty is None and not args.allow_dirty:
+        if (dirty is None or rev == "unknown") and not args.allow_dirty:
             ap.error("cannot determine git status of the harness (not a git checkout, or git failed); "
                      "pass --allow-dirty to run without verified source identity")
         if dirty and not args.allow_dirty:
@@ -192,7 +192,7 @@ def main(argv: list[str] | None = None) -> int:
     record = {
         "separator": sep.info.to_dict(),
         "dataset": args.dataset, "split": args.split, "n_items": len(results),
-        "frozen_config_sha256": frozen_sha, "git_rev": git_rev(), "git_dirty": dirty,
+        "frozen_config_sha256": frozen_sha, "git_rev": rev, "git_dirty": dirty,
         "allow_dirty": bool(args.allow_dirty),
         "env": {"python": platform.python_version(), "machine": platform.machine(),
                 "platform": platform.platform(), "processor": platform.processor(),
