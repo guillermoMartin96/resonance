@@ -196,3 +196,77 @@ def test_fetch_replaces_corrupt_cache_and_verifies(tmp_path, monkeypatch):
     with pytest.raises(fm.ChecksumError):
         fm.fetch("https://example.invalid/m.onnx", dest, _sha(b"good"))
     assert not dest.exists()
+
+
+# --- Round 2: M0-03a complete schema, M0-03b unknown git state, M0-07 comparison --------
+
+@pytest.mark.parametrize("mutate", [
+    lambda c: c.update(metrics_module="wrong.py"),
+    lambda c: c.update(extra_top_level=1),
+    lambda c: c["datasets"]["procedural"].update(unknown=1),
+    lambda c: c["datasets"].update(newset={}),
+    lambda c: c["separators"]["baseline.hpss"].pop("kernel"),
+])
+def test_frozen_config_schema_is_complete(mutate):
+    from stemforge_bench.run import check_frozen
+    cfg = _frozen()
+    mutate(cfg)
+    with pytest.raises(ValueError):
+        check_frozen(cfg, "procedural", create("baseline.hpss"))
+
+
+def test_holdout_refuses_unknown_git_state(monkeypatch, capsys):
+    from stemforge_bench import run
+    monkeypatch.setattr(run, "git_dirty", lambda: None)
+    argv = ["--dataset", "procedural", "--split", "holdout", "--separator", "baseline.mixture",
+            "--frozen-config", str(BENCH / "config" / "frozen.json"), "--limit", "1"]
+    with pytest.raises(SystemExit):
+        run.main(argv)
+    assert "git" in capsys.readouterr().err
+
+
+def _load_compare():
+    spec = importlib.util.spec_from_file_location("compare_results", BENCH / "scripts" / "compare_results.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def _result(sdrs: dict) -> dict:
+    return {"items": [{"item": i, "metrics": {"vocals": {"sdr": s}}} for i, s in sdrs.items()]}
+
+
+@pytest.mark.parametrize("new", [
+    {"a": 10.0, "b": None},          # a score became invalid
+    {"a": 10.0},                     # an item disappeared
+])
+def test_compare_flags_validity_changes(tmp_path, monkeypatch, new):
+    cr = _load_compare()
+    (tmp_path / "base").mkdir(); (tmp_path / "new").mkdir()
+    name = "ds__holdout__sep.json"
+    (tmp_path / "base" / name).write_text(json.dumps(_result({"a": 10.0, "b": 12.0})))
+    (tmp_path / "new" / name).write_text(json.dumps(_result(new)))
+    monkeypatch.setattr(sys, "argv", ["x", str(tmp_path / "new"), "--base", str(tmp_path / "base")])
+    assert cr.main() == 1
+
+
+def test_compare_flags_role_set_change(tmp_path, monkeypatch):
+    cr = _load_compare()
+    (tmp_path / "base").mkdir(); (tmp_path / "new").mkdir()
+    name = "ds__holdout__sep.json"
+    base = _result({"a": 10.0})
+    new = _result({"a": 10.0}); new["items"][0]["metrics"]["drums"] = {"sdr": 1.0}
+    (tmp_path / "base" / name).write_text(json.dumps(base))
+    (tmp_path / "new" / name).write_text(json.dumps(new))
+    monkeypatch.setattr(sys, "argv", ["x", str(tmp_path / "new"), "--base", str(tmp_path / "base")])
+    assert cr.main() == 1
+
+
+def test_compare_identical_passes(tmp_path, monkeypatch):
+    cr = _load_compare()
+    (tmp_path / "base").mkdir(); (tmp_path / "new").mkdir()
+    name = "ds__holdout__sep.json"
+    for d in ("base", "new"):
+        (tmp_path / d / name).write_text(json.dumps(_result({"a": 10.0, "b": None})))
+    monkeypatch.setattr(sys, "argv", ["x", str(tmp_path / "new"), "--base", str(tmp_path / "base")])
+    assert cr.main() == 0

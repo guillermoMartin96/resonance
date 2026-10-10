@@ -70,11 +70,40 @@ def _expect(what: str, frozen, actual) -> None:
         raise ValueError(f"frozen config mismatch for {what}: frozen={frozen!r}, code={actual!r}")
 
 
+# Complete schema of an execution-relevant frozen config. Every tunable parameter must be
+# frozen explicitly, so a changed adapter default can't slip in through an omitted key.
+TOP_LEVEL_KEYS = {"frozen_at", "rationale", "separators", "datasets", "metrics_module"}
+DATASET_KEYS = {"procedural": {"holdout_seeds", "seconds"},
+                "babyslakh": {"holdout", "excerpt_s"},
+                "vocalmix": {"holdout_vocals", "pairs_per_vocal"}}
+SEPARATOR_KEYS = {"baseline.mixture": set(), "baseline.hpss": {"n_fft", "kernel", "bass_cutoff_hz"},
+                  "demucs": {"shifts", "overlap", "seed", "device"}, "mdx": {"hop", "segment", "overlap"}}
+METRICS_MODULE = "stemforge_bench/metrics.py"
+
+
+def _keys(what: str, actual, expected: set) -> None:
+    if set(actual) != expected:
+        raise ValueError(f"frozen config {what}: keys {sorted(actual)} != expected {sorted(expected)}")
+
+
 def check_frozen(cfg: dict, dataset: str, sep: Separator) -> None:
     """Raise ValueError unless the frozen config describes exactly what will run."""
+    _keys("top level", cfg, TOP_LEVEL_KEYS)
+    _expect("metrics_module", cfg["metrics_module"], METRICS_MODULE)
+    from . import metrics
+    if Path(metrics.__file__).resolve() != (BENCH / METRICS_MODULE).resolve():
+        raise ValueError(f"imported metrics module {metrics.__file__} is not {METRICS_MODULE}")
+    _keys("datasets", cfg["datasets"], set(DATASET_KEYS))
+    for name, keys in DATASET_KEYS.items():
+        _keys(f"datasets.{name}", cfg["datasets"][name], keys)
     sid = sep.info.id
     if sid not in cfg["separators"]:
         raise ValueError(f"{sid} is not in the frozen config")
+    for other, params in cfg["separators"].items():
+        family = other if other.startswith("baseline.") else other.split(".")[0]
+        if family not in SEPARATOR_KEYS:
+            raise ValueError(f"frozen config has unknown separator {other}")
+        _keys(f"separators.{other}", params, SEPARATOR_KEYS[family])
     for key, value in cfg["separators"][sid].items():
         if key not in sep.info.params:
             raise ValueError(f"frozen param {sid}.{key} is not a parameter of the adapter")
@@ -118,6 +147,9 @@ def main(argv: list[str] | None = None) -> int:
             check_frozen(cfg, args.dataset, create(args.separator))
         except ValueError as e:
             ap.error(str(e))
+        if dirty is None and not args.allow_dirty:
+            ap.error("cannot determine git status of the harness (not a git checkout, or git failed); "
+                     "pass --allow-dirty to run without verified source identity")
         if dirty and not args.allow_dirty:
             ap.error(f"uncommitted changes under {SOURCE_PATHS}; commit them or pass --allow-dirty")
         frozen_sha = hashlib.sha256(args.frozen_config.read_bytes()).hexdigest()
@@ -161,6 +193,7 @@ def main(argv: list[str] | None = None) -> int:
         "separator": sep.info.to_dict(),
         "dataset": args.dataset, "split": args.split, "n_items": len(results),
         "frozen_config_sha256": frozen_sha, "git_rev": git_rev(), "git_dirty": dirty,
+        "allow_dirty": bool(args.allow_dirty),
         "env": {"python": platform.python_version(), "machine": platform.machine(),
                 "platform": platform.platform(), "processor": platform.processor(),
                 "numpy": numpy.__version__, "scipy": scipy.__version__},
