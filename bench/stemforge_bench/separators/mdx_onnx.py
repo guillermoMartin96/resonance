@@ -25,8 +25,35 @@ from .base import SeparationError, SeparatorInfo, validate_input
 
 MODEL_DIR = Path(__file__).resolve().parents[2] / ".cache" / "models" / "mdx"
 DOWNLOAD_URL = "https://github.com/TRvlvr/model_repo/releases/download/all_public_uvr_models/{name}"
-PARAMS_URL = "https://raw.githubusercontent.com/TRvlvr/application_data/main/mdx_model_data/model_data_new.json"
+# UVR parameter table, pinned to the commit whose content was used for every M0 result.
+PARAMS_REVISION = "4621ca87e42bba17738b6ca0d0b5348763eb68ad"
+PARAMS_URL = ("https://raw.githubusercontent.com/TRvlvr/application_data/"
+              f"{PARAMS_REVISION}/mdx_model_data/model_data_new.json")
+PARAMS_SHA256 = "1aca8f9bcc57233bc714029663a9ec2345d9c7721f91e5e08f46392a879c6a9a"
+MODEL_SHA256 = {  # observed 2026-10-09; the weights behind every committed MDX result
+    "Kim_Vocal_2.onnx": "ce74ef3b6a6024ce44211a07be9cf8bc6d87728cc852a68ab34eb8e58cde9c8b",
+    "UVR-MDX-NET-Inst_HQ_3.onnx": "317554b07fe1ea5279a77f2b1520a41ea4b93432560c4ffd08792c30fddf9adc",
+}
 SAMPLE_RATE = 44100
+
+
+def sha256_file(path: Path) -> str:
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for block in iter(lambda: f.read(1 << 20), b""):
+            h.update(block)
+    return h.hexdigest()
+
+
+def verify_sha256(path: Path, expected: str | None) -> str:
+    """Return the file's sha256, raising SeparationError unless it equals `expected`."""
+    if expected is None:
+        raise SeparationError(f"{path.name} has no pinned sha256; refusing to load unverified weights")
+    got = sha256_file(path)
+    if got != expected:
+        raise SeparationError(f"sha256 mismatch for {path}: expected {expected}, got {got}; "
+                              "delete it and re-run scripts/fetch_models.py")
+    return got
 
 
 def uvr_model_hash(path: Path) -> str:
@@ -94,9 +121,13 @@ class MDXOnnxSeparator:
             return
         import onnxruntime as ort
 
-        if not self.path.exists():
+        table_path = self.path.parent / "model_data.json"
+        if not self.path.exists() or not table_path.exists():
             raise SeparationError(f"model weights not found at {self.path}; run scripts/fetch_models.py")
-        table = json.loads((self.path.parent / "model_data.json").read_text())
+        # Verify both artefacts before parsing or handing either to onnxruntime.
+        sha = verify_sha256(self.path, MODEL_SHA256.get(self.model_file))
+        table_sha = verify_sha256(table_path, PARAMS_SHA256)
+        table = json.loads(table_path.read_text())
         params = table.get(uvr_model_hash(self.path))
         if params is None:
             raise SeparationError(f"no UVR parameters for {self.model_file}")
@@ -106,8 +137,8 @@ class MDXOnnxSeparator:
         if self.threads:
             opts.intra_op_num_threads = self.threads
         self._session = ort.InferenceSession(str(self.path), sess_options=opts, providers=["CPUExecutionProvider"])
-        sha = hashlib.sha256(self.path.read_bytes()).hexdigest()
-        self.info = self._make_info(sha, params)
+        self.info = self._make_info(sha, {**params, "param_table_sha256": table_sha,
+                                          "param_table_revision": PARAMS_REVISION})
 
     def _demix(self, mix: np.ndarray) -> np.ndarray:
         p = self._params

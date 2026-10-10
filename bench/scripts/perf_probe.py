@@ -14,19 +14,20 @@ from pathlib import Path
 
 BENCH = Path(__file__).resolve().parents[1]
 CHILD = r"""
-import json, os, resource, sys, time
+import json, os, sys, time
 sys.path.insert(0, {bench!r})
 t0 = time.perf_counter()
 from stemforge_bench.audio import read_audio
+from stemforge_bench.platform_info import peak_rss_mb
 from stemforge_bench.separators import create
 mix, sr = read_audio({wav!r})
-rss_data = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1e6
+rss_data = peak_rss_mb()
 sep = create({sid!r})
 t1 = time.perf_counter(); sep.load(); load_s = time.perf_counter() - t1
-rss_load = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1e6
+rss_load = peak_rss_mb()
 t2 = time.perf_counter(); sep.separate(mix, sr); sep_s = time.perf_counter() - t2
 print(json.dumps({{"separator": {sid!r}, "audio_s": {seconds}, "load_s": load_s, "separate_s": sep_s,
-                  "rtf": sep_s / {seconds}, "peak_rss_mb": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1e6,
+                  "rtf": sep_s / {seconds}, "peak_rss_mb": peak_rss_mb(),
                   "rss_after_data_mb": rss_data, "rss_after_load_mb": rss_load}}))
 """
 

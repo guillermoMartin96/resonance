@@ -18,6 +18,7 @@ import numpy as np
 SR = 44100
 DEV_SEEDS = (0, 1, 2, 3)
 HOLDOUT_SEEDS = (1000, 1001, 1002, 1003)
+SECONDS = 24.0
 
 VOWELS = {  # (F1, F2, F3) Hz, rough adult formants
     "a": (800, 1150, 2900), "e": (400, 1600, 2700), "i": (350, 2300, 3000),
@@ -78,7 +79,7 @@ def pan(x: np.ndarray, p: float) -> np.ndarray:
     return np.stack([x * np.cos(ang), x * np.sin(ang)])
 
 
-def make_item(seed: int, seconds: float = 24.0) -> Item:
+def make_item(seed: int, seconds: float = SECONDS) -> Item:
     rng = np.random.default_rng(seed)
     bpm = float(rng.uniform(84, 124))
     beat = 60.0 / bpm

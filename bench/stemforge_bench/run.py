@@ -2,8 +2,12 @@
 
     python -m stemforge_bench.run --dataset babyslakh --split dev --separator demucs.htdemucs
 
-Holdout splits additionally require --frozen-config config/frozen.json; its sha256
-is stored in the result so holdout scores are tied to a configuration fixed in advance.
+Holdout splits additionally require --frozen-config config/frozen.json. Before anything
+runs, every setting in it is checked against what will actually execute (separator
+params, dataset seeds/tracks/vocals/durations), and the harness source must be clean in
+git. The config's sha256, the git revision, and a sha256 of every input item are stored
+in the result, so a holdout score is tied to a configuration fixed in advance and to the
+exact audio scored.
 """
 from __future__ import annotations
 
@@ -11,7 +15,6 @@ import argparse
 import hashlib
 import json
 import platform
-import resource
 import subprocess
 import sys
 import time
@@ -21,24 +24,75 @@ import numpy as np
 
 from .audio import write_audio
 from .datasets import DATASETS
+from .datasets import procedural, slakh, vocalmix
 from .metrics import evaluate_stem
+from .platform_info import peak_rss_mb as rss_mb
 from .separators import create
-from .separators.base import validate_output
+from .separators.base import Separator, validate_output
 
 BENCH = Path(__file__).resolve().parents[1]
+SOURCE_PATHS = ["stemforge_bench", "config", "data"]  # what a holdout run must not have dirty
 
 
-def rss_mb() -> float:
-    peak = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-    return peak / 1e6 if sys.platform == "darwin" else peak / 1e3  # bytes on macOS, KiB on Linux
+def _git(*args: str) -> str | None:
+    try:
+        return subprocess.run(["git", *args], cwd=BENCH, capture_output=True,
+                              text=True, check=True, timeout=10).stdout.strip()
+    except Exception:
+        return None
 
 
 def git_rev() -> str:
-    try:
-        return subprocess.run(["git", "rev-parse", "HEAD"], cwd=BENCH, capture_output=True,
-                              text=True, check=True, timeout=10).stdout.strip()
-    except Exception:
-        return "unknown"
+    return _git("rev-parse", "HEAD") or "unknown"
+
+
+def git_dirty() -> bool | None:
+    out = _git("status", "--porcelain", "--", *SOURCE_PATHS)
+    return None if out is None else bool(out)
+
+
+def item_digest(item) -> str:
+    """sha256 over sample rate and every stem's float32 samples, in sorted role order."""
+    h = hashlib.sha256(str(item.sample_rate).encode())
+    for role in sorted(item.stems):
+        a = np.ascontiguousarray(item.stems[role], dtype=np.float32)
+        h.update(role.encode() + str(a.shape).encode() + a.tobytes())
+    return h.hexdigest()
+
+
+def _slakh_range(spec: str) -> list[str]:
+    lo, hi = (int(s.removeprefix("Track")) for s in spec.split("-"))
+    return [f"Track{i:05d}" for i in range(lo, hi + 1)]
+
+
+def _expect(what: str, frozen, actual) -> None:
+    if frozen != actual:
+        raise ValueError(f"frozen config mismatch for {what}: frozen={frozen!r}, code={actual!r}")
+
+
+def check_frozen(cfg: dict, dataset: str, sep: Separator) -> None:
+    """Raise ValueError unless the frozen config describes exactly what will run."""
+    sid = sep.info.id
+    if sid not in cfg["separators"]:
+        raise ValueError(f"{sid} is not in the frozen config")
+    for key, value in cfg["separators"][sid].items():
+        if key not in sep.info.params:
+            raise ValueError(f"frozen param {sid}.{key} is not a parameter of the adapter")
+        _expect(f"{sid}.{key}", value, sep.info.params[key])
+    ds = cfg["datasets"]
+    needed = {"procedural": ["procedural"], "babyslakh": ["babyslakh"],
+              "vocalmix": ["babyslakh", "vocalmix"]}[dataset]
+    if "procedural" in needed:
+        _expect("procedural.holdout_seeds", list(ds["procedural"]["holdout_seeds"]), list(procedural.HOLDOUT_SEEDS))
+        _expect("procedural.seconds", float(ds["procedural"]["seconds"]), procedural.SECONDS)
+    if "babyslakh" in needed:
+        _expect("babyslakh.holdout", _slakh_range(ds["babyslakh"]["holdout"]), slakh.HOLDOUT)
+        _expect("babyslakh.excerpt_s", float(ds["babyslakh"]["excerpt_s"]), slakh.EXCERPT_S)
+    if "vocalmix" in needed:
+        manifest = json.loads(vocalmix.MANIFEST.read_text())
+        hold = sorted(a["id"] for a in manifest["acappellas"] if a["split"] == "holdout")
+        _expect("vocalmix.holdout_vocals", sorted(ds["vocalmix"]["holdout_vocals"]), hold)
+        _expect("vocalmix.pairs_per_vocal", ds["vocalmix"]["pairs_per_vocal"], vocalmix.PAIRS_PER_VOCAL)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -50,15 +104,22 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--frozen-config", type=Path)
     ap.add_argument("--save-audio", action="store_true", help="write estimates under .cache/outputs for listening")
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--allow-dirty", action="store_true",
+                    help="permit a holdout run with uncommitted harness changes (recorded in the result)")
     args = ap.parse_args(argv)
 
     frozen_sha = None
+    dirty = git_dirty()
     if args.split == "holdout":
         if not args.frozen_config or not args.frozen_config.exists():
             ap.error("holdout runs require --frozen-config (fixed before scoring)")
         cfg = json.loads(args.frozen_config.read_text())
-        if args.separator not in cfg["separators"]:
-            ap.error(f"{args.separator} is not in the frozen config")
+        try:
+            check_frozen(cfg, args.dataset, create(args.separator))
+        except ValueError as e:
+            ap.error(str(e))
+        if dirty and not args.allow_dirty:
+            ap.error(f"uncommitted changes under {SOURCE_PATHS}; commit them or pass --allow-dirty")
         frozen_sha = hashlib.sha256(args.frozen_config.read_bytes()).hexdigest()
 
     t0 = time.perf_counter()
@@ -84,7 +145,7 @@ def main(argv: list[str] | None = None) -> int:
         validate_output(sep.info, mix, stems)
         metrics = {role: evaluate_stem(item.stems, mix, role, est, item.sample_rate)
                    for role, est in stems.items()}
-        results.append({"item": item.id, "license": item.license, "duration_s": dur,
+        results.append({"item": item.id, "input_sha256": item_digest(item), "license": item.license, "duration_s": dur,
                         "separate_s": sep_s, "rtf": sep_s / dur, "metrics": metrics})
         if args.save_audio:
             out_dir = BENCH / ".cache" / "outputs" / args.dataset / args.split / item.id
@@ -99,7 +160,7 @@ def main(argv: list[str] | None = None) -> int:
     record = {
         "separator": sep.info.to_dict(),
         "dataset": args.dataset, "split": args.split, "n_items": len(results),
-        "frozen_config_sha256": frozen_sha, "git_rev": git_rev(),
+        "frozen_config_sha256": frozen_sha, "git_rev": git_rev(), "git_dirty": dirty,
         "env": {"python": platform.python_version(), "machine": platform.machine(),
                 "platform": platform.platform(), "processor": platform.processor(),
                 "numpy": numpy.__version__, "scipy": scipy.__version__},
